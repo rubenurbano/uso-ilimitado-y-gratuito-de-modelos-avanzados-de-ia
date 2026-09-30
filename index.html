@@ -1,0 +1,2923 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uso Ilimitado y Gratuito de Modelos Avanzados de IA — Tutorial</title>
+<style>
+/* ============ RESET & BASE ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#0a0e1a;
+  --card:#0f172a;
+  --border:#1e3a5f;
+  --cyan:#00d4ff;
+  --green:#22c55e;
+  --amber:#f59e0b;
+  --red:#ef4444;
+  --purple:#a855f7;
+  --txt:#dbe6f3;
+  --txt-dim:#8ba0bd;
+  --radius:10px;
+}
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  line-height:1.65;
+  font-size:1rem;
+  -webkit-text-size-adjust:100%;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background:
+    radial-gradient(900px 500px at 12% -5%, rgba(0,212,255,.09), transparent 60%),
+    radial-gradient(800px 500px at 90% 0%, rgba(168,85,247,.08), transparent 60%),
+    radial-gradient(700px 600px at 50% 110%, rgba(34,197,94,.06), transparent 60%);
+  pointer-events:none;z-index:0;
+}
+img,svg{max-width:100%}
+a{color:var(--cyan);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ============ PROGRESS BAR ============ */
+#progressWrap{
+  position:fixed;top:0;left:0;right:0;height:4px;
+  background:rgba(30,58,95,.5);z-index:1200;
+}
+#progressBar{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--cyan),var(--green),var(--amber),var(--purple));
+  box-shadow:0 0 12px rgba(0,212,255,.7);
+  transition:width .12s linear;
+  border-radius:0 3px 3px 0;
+}
+
+/* ============ NAVBAR ============ */
+#navbar{
+  position:fixed;top:4px;left:0;right:0;
+  background:rgba(10,14,26,.94);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  z-index:1100;
+  display:flex;align-items:center;gap:6px;
+  padding:8px 10px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:thin;
+  -webkit-overflow-scrolling:touch;
+}
+#navbar::-webkit-scrollbar{height:5px}
+#navbar::-webkit-scrollbar-thumb{background:#1e3a5f;border-radius:3px}
+.brand{
+  flex:0 0 auto;display:flex;align-items:center;gap:8px;
+  font-weight:700;font-size:.82rem;letter-spacing:.5px;
+  color:var(--cyan);padding:4px 10px 4px 4px;
+  border-right:1px solid var(--border);margin-right:4px;
+  white-space:nowrap;
+}
+.brand .dot{
+  width:9px;height:9px;border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 10px var(--cyan);
+  animation:pulseDot 2s ease-in-out infinite;
+}
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.75)}}
+.nav-btn{
+  flex:0 0 auto;
+  background:transparent;
+  border:1px solid transparent;
+  color:var(--txt-dim);
+  font-family:inherit;
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.3px;
+  padding:7px 13px;
+  border-radius:8px;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:all .2s ease;
+}
+.nav-btn:hover{color:var(--cyan);background:rgba(0,212,255,.08);border-color:rgba(0,212,255,.28)}
+.nav-btn.active{
+  color:#04121a;
+  background:linear-gradient(135deg,var(--cyan),#4fe3ff);
+  border-color:var(--cyan);
+  box-shadow:0 0 14px rgba(0,212,255,.45);
+}
+.nav-btn.nav-credits{color:var(--purple);border-color:rgba(168,85,247,.35)}
+.nav-btn.nav-credits:hover{background:rgba(168,85,247,.12);color:#c9a4ff}
+.nav-btn.nav-credits.active{background:linear-gradient(135deg,var(--purple),#c084fc);color:#160b26;box-shadow:0 0 14px rgba(168,85,247,.5)}
+.nav-btn.nav-fuentes{color:var(--green);border-color:rgba(34,197,94,.3)}
+.nav-btn.nav-fuentes:hover{background:rgba(34,197,94,.1);color:#5ee08b}
+.nav-btn.nav-fuentes.active{background:linear-gradient(135deg,var(--green),#4ade80);color:#04180c;box-shadow:0 0 14px rgba(34,197,94,.45)}
+
+/* ============ LAYOUT ============ */
+main{
+  position:relative;z-index:1;
+  max-width:1180px;
+  margin:0 auto;
+  padding:96px 18px 70px;
+}
+.section{display:none;animation:fadeUp .38s ease both}
+.section.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ============ HOME ============ */
+.home-hero{
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:linear-gradient(160deg,#0f172a 0%,#0b1220 60%,#0a0e1a 100%);
+  overflow:hidden;
+  box-shadow:0 0 0 1px rgba(0,212,255,.06),0 18px 50px -20px rgba(0,0,0,.9);
+  margin-bottom:26px;
+}
+.home-topbar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+  padding:12px 16px;
+  border-bottom:1px solid var(--border);
+  background:rgba(15,23,42,.6);
+}
+.badge{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:.7rem;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;
+  padding:5px 12px;border-radius:999px;
+  border:1px solid rgba(0,212,255,.4);
+  color:var(--cyan);
+  background:rgba(0,212,255,.07);
+}
+.badge .live{
+  width:7px;height:7px;border-radius:50%;background:var(--red);
+  box-shadow:0 0 8px var(--red);
+  animation:pulseDot 1.4s ease-in-out infinite;
+}
+.badge.green{border-color:rgba(34,197,94,.45);color:var(--green);background:rgba(34,197,94,.07)}
+.badge.purple{border-color:rgba(168,85,247,.45);color:var(--purple);background:rgba(168,85,247,.07)}
+.home-title-block{padding:22px 24px 6px}
+.home-title{
+  font-size:clamp(1.5rem,4.6vw,2.6rem);
+  line-height:1.15;
+  font-weight:800;
+  letter-spacing:-.5px;
+  background:linear-gradient(100deg,#ffffff 0%,var(--cyan) 45%,var(--purple) 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.home-sub{
+  margin-top:10px;
+  color:var(--cyan);
+  font-size:clamp(.85rem,2.4vw,1.05rem);
+  font-weight:600;letter-spacing:.4px;
+}
+.home-desc{
+  padding:14px 24px 20px;
+  color:var(--txt-dim);
+  font-size:.95rem;
+  max-width:900px;
+}
+.quote{
+  margin:0 24px 22px;
+  padding:16px 18px 16px 20px;
+  border-left:3px solid var(--amber);
+  background:rgba(245,158,11,.06);
+  border-radius:0 10px 10px 0;
+  font-style:italic;
+  color:#f3dcae;
+  font-size:.95rem;
+}
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:10px;
+  padding:0 24px 22px;
+}
+.metric{
+  background:rgba(15,23,42,.85);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:13px 14px;
+  text-align:center;
+}
+.metric b{
+  display:block;
+  font-size:1.28rem;
+  color:var(--cyan);
+  font-weight:800;
+  line-height:1.2;
+}
+.metric span{font-size:.7rem;color:var(--txt-dim);letter-spacing:.7px;text-transform:uppercase}
+
+/* SVG CONTAINER */
+.svg-holder{
+  width:100%;
+  background:#070b14;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  line-height:0;
+  position:relative;
+}
+.svg-holder svg{display:block;width:100%;height:auto;aspect-ratio:16/9}
+
+/* ============ CARDS & CONTENT ============ */
+.sec-head{
+  display:flex;align-items:center;gap:13px;
+  margin:6px 0 20px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--border);
+}
+.sec-icon{
+  flex:0 0 auto;
+  width:46px;height:46px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.35rem;
+  background:linear-gradient(140deg,rgba(0,212,255,.16),rgba(168,85,247,.13));
+  border:1px solid var(--border);
+}
+.sec-head h2{
+  font-size:clamp(1.1rem,3.4vw,1.55rem);
+  font-weight:800;letter-spacing:-.3px;
+  color:#fff;
+}
+.sec-head p{font-size:.78rem;color:var(--txt-dim);letter-spacing:.6px;text-transform:uppercase;margin-top:2px}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px 18px 16px;
+  margin-bottom:16px;
+}
+.card h3{
+  font-size:1.02rem;color:var(--cyan);font-weight:700;
+  margin-bottom:10px;letter-spacing:.2px;
+  display:flex;align-items:center;gap:9px;
+}
+.card h3 .num{
+  flex:0 0 auto;
+  font-size:.72rem;font-weight:800;
+  background:rgba(0,212,255,.13);
+  border:1px solid rgba(0,212,255,.35);
+  color:var(--cyan);
+  border-radius:6px;padding:2px 8px;
+}
+.card h4{font-size:.92rem;color:#e8f2ff;margin:14px 0 7px;font-weight:700}
+.card p{color:var(--txt);font-size:.93rem;margin-bottom:10px}
+.card p:last-child{margin-bottom:0}
+.card ul,.card ol{margin:8px 0 10px 20px;color:var(--txt);font-size:.93rem}
+.card li{margin-bottom:6px}
+.card li::marker{color:var(--cyan)}
+strong{color:#fff}
+em{color:#c9d9ee}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+
+/* CALLOUTS */
+.callout{
+  border-radius:var(--radius);
+  padding:13px 15px;
+  margin:13px 0;
+  font-size:.9rem;
+  border-left:4px solid;
+  display:flex;gap:11px;align-items:flex-start;
+}
+.callout .ci{flex:0 0 auto;font-size:1.05rem;line-height:1.4}
+.callout.info{background:rgba(0,212,255,.07);border-color:var(--cyan);color:#bfe9f7}
+.callout.example{background:rgba(34,197,94,.07);border-color:var(--green);color:#c1f0d0}
+.callout.warn{background:rgba(245,158,11,.08);border-color:var(--amber);color:#f6e0b4}
+.callout.error{background:rgba(239,68,68,.08);border-color:var(--red);color:#f8c4c4}
+
+/* STEPS */
+.steps{counter-reset:st;list-style:none;margin:12px 0 0}
+.steps li{
+  counter-increment:st;
+  position:relative;
+  padding:0 0 14px 44px;
+  border-left:2px solid rgba(30,58,95,.85);
+  margin-left:15px;
+  font-size:.92rem;
+}
+.steps li:last-child{border-left-color:transparent;padding-bottom:0}
+.steps li::before{
+  content:counter(st);
+  position:absolute;left:-16px;top:-2px;
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.78rem;font-weight:800;
+  background:var(--card);
+  border:2px solid var(--cyan);
+  color:var(--cyan);
+  box-shadow:0 0 10px rgba(0,212,255,.22);
+}
+.steps li b{color:#fff;display:block;margin-bottom:3px;font-size:.93rem}
+.steps li .why{
+  display:block;margin-top:5px;
+  font-size:.82rem;color:var(--txt-dim);
+  border-left:2px solid rgba(0,212,255,.3);
+  padding-left:9px;
+}
+
+/* TABLES */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0;border:1px solid var(--border);border-radius:var(--radius)}
+table{width:100%;border-collapse:collapse;font-size:.86rem;min-width:440px}
+th{
+  background:rgba(0,212,255,.09);
+  color:var(--cyan);
+  font-weight:700;text-align:left;
+  padding:11px 13px;
+  border-bottom:1px solid var(--border);
+  letter-spacing:.4px;font-size:.78rem;text-transform:uppercase;
+  white-space:nowrap;
+}
+td{padding:10px 13px;border-bottom:1px solid rgba(30,58,95,.55);color:var(--txt);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(0,212,255,.035)}
+
+/* CODE / PROMPT BLOCKS */
+pre{
+  background:#070b14;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:13px 14px;
+  overflow-x:auto;
+  font-family:'Consolas','Monaco','Courier New',monospace;
+  font-size:.8rem;
+  line-height:1.6;
+  color:#9fe8ff;
+  margin:11px 0;
+  white-space:pre;
+  -webkit-overflow-scrolling:touch;
+}
+code{
+  font-family:'Consolas','Monaco','Courier New',monospace;
+  background:rgba(0,212,255,.09);
+  border:1px solid rgba(0,212,255,.18);
+  color:#8fe6ff;
+  padding:1px 6px;border-radius:5px;
+  font-size:.84em;
+  word-break:break-word;
+}
+pre code{background:none;border:none;padding:0;color:inherit;font-size:1em}
+
+.prompt-box{
+  position:relative;
+  background:#070b14;
+  border:1px solid rgba(168,85,247,.45);
+  border-left:4px solid var(--purple);
+  border-radius:var(--radius);
+  padding:14px 15px 14px 16px;
+  margin:12px 0;
+  font-size:.87rem;
+  color:#e2d3fb;
+  font-style:italic;
+}
+.prompt-box::before{
+  content:"PROMPT EXACTO";
+  position:absolute;top:-9px;left:14px;
+  font-size:.6rem;font-weight:800;letter-spacing:1.4px;
+  background:var(--bg);padding:0 7px;
+  color:var(--purple);font-style:normal;
+}
+
+/* CHIPS */
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+.chip{
+  font-size:.73rem;font-weight:700;letter-spacing:.4px;
+  padding:4px 11px;border-radius:999px;
+  border:1px solid var(--border);
+  background:rgba(15,23,42,.9);
+  color:var(--txt-dim);
+}
+.chip.c{border-color:rgba(0,212,255,.4);color:var(--cyan)}
+.chip.g{border-color:rgba(34,197,94,.4);color:var(--green)}
+.chip.a{border-color:rgba(245,158,11,.4);color:var(--amber)}
+.chip.r{border-color:rgba(239,68,68,.4);color:var(--red)}
+.chip.p{border-color:rgba(168,85,247,.4);color:var(--purple)}
+
+/* ACCORDION */
+.acc{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;background:var(--card)}
+.acc-head{
+  width:100%;text-align:left;
+  background:transparent;border:none;
+  color:var(--txt);font-family:inherit;
+  font-size:.9rem;font-weight:700;
+  padding:13px 15px;
+  cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  transition:background .2s;
+}
+.acc-head:hover{background:rgba(0,212,255,.05)}
+.acc-head .arw{transition:transform .28s;color:var(--cyan);flex:0 0 auto;font-size:.8rem}
+.acc.open .acc-head .arw{transform:rotate(180deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.acc.open .acc-body{max-height:1400px}
+.acc-inner{padding:0 15px 15px;font-size:.9rem;color:var(--txt);border-top:1px solid var(--border);padding-top:13px}
+
+/* CHECKLIST */
+.chk{list-style:none;margin:10px 0}
+.chk li{
+  position:relative;padding:7px 0 7px 30px;
+  font-size:.9rem;border-bottom:1px dashed rgba(30,58,95,.5);
+}
+.chk li:last-child{border-bottom:none}
+.chk li::before{
+  content:"✓";
+  position:absolute;left:4px;top:6px;
+  color:var(--green);font-weight:800;font-size:.9rem;
+}
+
+/* FLOW DIAGRAM */
+.flow{
+  display:flex;flex-wrap:wrap;align-items:center;gap:9px;
+  margin:14px 0;padding:15px;
+  background:#070b14;border:1px solid var(--border);border-radius:var(--radius);
+  justify-content:center;
+}
+.flow-node{
+  padding:9px 13px;border-radius:9px;
+  font-size:.77rem;font-weight:700;text-align:center;
+  border:1px solid var(--border);background:rgba(15,23,42,.95);
+  color:var(--txt);line-height:1.35;
+}
+.flow-node.c{border-color:rgba(0,212,255,.5);color:var(--cyan);box-shadow:0 0 12px rgba(0,212,255,.12)}
+.flow-node.g{border-color:rgba(34,197,94,.5);color:var(--green);box-shadow:0 0 12px rgba(34,197,94,.12)}
+.flow-node.a{border-color:rgba(245,158,11,.5);color:var(--amber);box-shadow:0 0 12px rgba(245,158,11,.12)}
+.flow-node.p{border-color:rgba(168,85,247,.5);color:var(--purple);box-shadow:0 0 12px rgba(168,85,247,.12)}
+.flow-node.r{border-color:rgba(239,68,68,.5);color:var(--red);box-shadow:0 0 12px rgba(239,68,68,.12)}
+.flow-arrow{color:var(--cyan);font-size:1.1rem;font-weight:800}
+
+/* FUENTES */
+.src-card{
+  display:flex;gap:14px;align-items:flex-start;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;margin-bottom:13px;
+  transition:border-color .22s,box-shadow .22s;
+}
+.src-card:hover{border-color:rgba(0,212,255,.5);box-shadow:0 0 18px -4px rgba(0,212,255,.28)}
+.src-ico{
+  flex:0 0 auto;width:44px;height:44px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;
+  background:rgba(0,212,255,.09);border:1px solid var(--border);
+}
+.src-card h4{color:#fff;font-size:.95rem;margin-bottom:5px}
+.src-card .lbl{font-size:.68rem;letter-spacing:1.1px;text-transform:uppercase;color:var(--txt-dim);margin-bottom:2px}
+.src-card a{word-break:break-all;font-size:.83rem}
+
+/* CREDITOS */
+.credits-wrap{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:14px;margin-top:18px;
+}
+.credit-item{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;
+}
+.credit-item .k{font-size:.68rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--txt-dim);margin-bottom:5px}
+.credit-item .v{font-size:1rem;font-weight:700;color:#fff;word-break:break-word}
+.credit-item .v.cy{color:var(--cyan)}
+.credit-item .v.pu{color:var(--purple)}
+.fiat{
+  margin-top:20px;text-align:center;
+  font-size:1.02rem;font-style:italic;letter-spacing:1px;
+  color:var(--amber);
+  padding:20px;
+  border:1px solid rgba(245,158,11,.32);
+  border-radius:var(--radius);
+  background:rgba(245,158,11,.05);
+}
+
+/* FOOTER */
+footer{
+  position:relative;z-index:1;
+  border-top:1px solid var(--border);
+  background:rgba(10,14,26,.95);
+  padding:26px 18px 34px;
+  text-align:center;
+}
+footer p{font-size:.84rem;color:var(--txt-dim);margin-bottom:6px}
+footer .f-fiat{margin-top:12px;color:var(--amber);font-style:italic;letter-spacing:.8px;font-size:.9rem}
+
+/* BACK TO TOP */
+#toTop{
+  position:fixed;right:16px;bottom:18px;
+  width:46px;height:46px;border-radius:50%;
+  background:linear-gradient(140deg,var(--cyan),#0a9cc0);
+  color:#04121a;border:none;
+  font-size:1.15rem;font-weight:800;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 22px -4px rgba(0,212,255,.6);
+  opacity:0;visibility:hidden;transform:translateY(14px);
+  transition:all .28s ease;
+  z-index:1150;
+}
+#toTop.show{opacity:1;visibility:visible;transform:translateY(0)}
+#toTop:active{transform:scale(.93)}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  main{padding:92px 12px 60px}
+  .home-title-block{padding:16px 15px 4px}
+  .home-desc{padding:10px 15px 16px;font-size:.9rem}
+  .quote{margin:0 15px 16px;font-size:.88rem;padding:13px 14px}
+  .metrics{padding:0 15px 16px;grid-template-columns:repeat(2,1fr);gap:8px}
+  .metric b{font-size:1.1rem}
+  .card{padding:15px 14px}
+  .sec-icon{width:40px;height:40px;font-size:1.15rem}
+  .nav-btn{font-size:.73rem;padding:6px 11px}
+  .brand{font-size:.75rem;padding-right:8px}
+  .steps li{padding-left:38px;font-size:.89rem}
+  .steps li::before{width:26px;height:26px;left:-14px;font-size:.72rem}
+  .flow-node{font-size:.72rem;padding:7px 10px}
+  table{font-size:.8rem;min-width:380px}
+  th,td{padding:9px 10px}
+  pre{font-size:.72rem;padding:11px}
+  .src-card{flex-direction:column;gap:10px}
+  #toTop{width:42px;height:42px;right:12px;bottom:14px}
+  .fiat{font-size:.92rem;padding:16px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  html{scroll-behavior:auto}
+}
+
+/* COPY BUTTON (prompts) — vive en el borde superior, fuera del texto */
+.prompt-box{padding-top:20px}
+.copy-btn{
+  position:absolute;top:-12px;right:12px;
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:inherit;font-size:.68rem;font-weight:800;letter-spacing:.8px;text-transform:uppercase;
+  font-style:normal;
+  background:var(--bg);color:var(--purple);
+  border:1px solid rgba(168,85,247,.55);border-radius:999px;
+  padding:4px 11px;cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.copy-btn:hover{background:var(--purple);color:#fff}
+.copy-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.copy-btn.copied{color:var(--green);border-color:rgba(34,197,94,.7);background:var(--bg)}
+.copy-btn.failed{color:var(--red);border-color:rgba(239,68,68,.7);background:var(--bg)}
+
+/* ==================================================================
+   MEJORAS v2: herramientas, copy en código, pager, personalización,
+   casillas de progreso, buscador, modo claro, impresión
+   ================================================================== */
+main{padding-top:max(96px,6rem)}
+@media(max-width:640px){main{padding-top:max(92px,5.75rem)}}
+.card,.src-card,.credit-item,.prompt-box{scroll-margin-top:calc(4.8rem + 12px)}
+
+/* --- herramientas en la barra --- */
+.tools{flex:0 0 auto;display:flex;align-items:center;gap:4px;padding-right:8px;margin-right:2px;border-right:1px solid var(--border)}
+.tool-btn{
+  background:transparent;border:1px solid var(--border);color:var(--txt-dim);
+  font-family:inherit;font-size:.78rem;font-weight:700;
+  min-width:32px;height:30px;padding:0 8px;border-radius:8px;cursor:pointer;
+  transition:all .2s;
+}
+.tool-btn:hover{color:var(--cyan);border-color:rgba(0,212,255,.45);background:rgba(0,212,255,.08)}
+.tool-btn:focus-visible,.nav-btn:focus-visible,.pg:focus-visible,.s-item:focus-visible{outline:2px solid var(--cyan);outline-offset:1px}
+.nav-btn.complete::after{content:" ✓";color:var(--green);font-weight:800}
+.nav-btn.active.complete::after{color:inherit}
+
+/* --- aviso emergente --- */
+#toast{
+  position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);
+  background:var(--card);color:var(--txt);border:1px solid var(--green);
+  padding:8px 16px;border-radius:999px;font-size:.82rem;font-weight:600;
+  opacity:0;pointer-events:none;transition:all .25s;z-index:1400;
+  box-shadow:0 8px 24px -8px rgba(0,0,0,.6);max-width:90vw;
+}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* --- copy en bloques de código y nombres de archivo --- */
+.code-wrap{position:relative;margin:18px 0 11px}
+.code-wrap pre{margin:0;padding-top:16px}
+code.cpy{cursor:copy;transition:background .15s}
+code.cpy::after{content:"⧉";margin-left:5px;font-size:.8em;opacity:.55}
+code.cpy:hover{background:rgba(0,212,255,.22)}
+code.cpy:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+
+/* --- resaltar destino al saltar --- */
+.flash{animation:flashHl 1.6s ease}
+@keyframes flashHl{0%,100%{box-shadow:none}25%{box-shadow:0 0 0 3px rgba(245,158,11,.6),0 0 24px rgba(245,158,11,.4)}}
+
+/* --- anterior / siguiente --- */
+.pager{display:flex;justify-content:space-between;gap:12px;margin:26px 0 0;flex-wrap:wrap}
+.pg{
+  flex:1 1 200px;max-width:calc(50% - 6px);
+  display:flex;flex-direction:column;gap:2px;text-align:left;
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  color:var(--txt);font-family:inherit;padding:12px 16px;cursor:pointer;
+  transition:border-color .2s,box-shadow .2s;
+}
+.pg span{font-weight:700;font-size:.85rem;color:var(--cyan)}
+.pg small{color:var(--txt-dim);font-size:.72rem}
+.pg:hover{border-color:rgba(0,212,255,.55);box-shadow:0 0 16px -4px rgba(0,212,255,.3)}
+.pg.next{text-align:right;margin-left:auto}
+@media(max-width:520px){.pg{max-width:none;flex-basis:100%}}
+
+/* --- prompts personalizables --- */
+.prompt-box[data-pid]{margin-bottom:8px}
+.pv{background:rgba(168,85,247,.22);border-radius:4px;padding:0 3px;font-style:normal;font-weight:600;color:inherit}
+.pv-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px;font-size:.8rem;color:var(--txt-dim)}
+.pv-row label{display:flex;flex-wrap:wrap;align-items:center;gap:8px;flex:1 1 260px}
+.pv-row label em{font-style:normal;color:var(--purple);font-weight:700}
+.pv-row input{
+  flex:1 1 160px;min-width:0;background:var(--bg);border:1px solid rgba(168,85,247,.4);
+  color:var(--txt);border-radius:8px;padding:6px 10px;font-family:inherit;font-size:.85rem;
+}
+.pv-row input:focus{outline:2px solid var(--purple);outline-offset:1px}
+.pv-reset,.lp-reset{
+  background:transparent;border:1px solid var(--border);color:var(--txt-dim);
+  border-radius:8px;padding:5px 10px;font-family:inherit;font-size:.75rem;cursor:pointer;
+}
+.pv-reset:hover,.lp-reset:hover{color:var(--cyan);border-color:var(--cyan)}
+
+/* --- capítulo 8: copiar todos y enlaces de origen --- */
+.copyall-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:2px 0 6px;font-size:.82rem;color:var(--txt-dim)}
+.copyall-btn{
+  font-family:inherit;font-size:.72rem;font-weight:800;letter-spacing:.8px;text-transform:uppercase;
+  background:transparent;color:var(--purple);border:1px solid rgba(168,85,247,.55);
+  border-radius:999px;padding:6px 14px;cursor:pointer;transition:all .2s;
+}
+.copyall-btn:hover{background:var(--purple);color:#fff}
+.copyall-btn.copied{color:var(--green);border-color:var(--green);background:transparent}
+.copyall-btn.failed{color:var(--red);border-color:var(--red);background:transparent}
+.card p.origin-link-row{margin:-2px 0 6px;font-size:.78rem}
+
+/* --- casillas de progreso --- */
+.list-progress{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.78rem;color:var(--txt-dim);margin:6px 0 8px}
+.lp-bar{flex:1 1 120px;min-width:80px;height:6px;border-radius:99px;background:rgba(30,58,95,.6);overflow:hidden}
+.lp-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--green));transition:width .25s}
+.done-chk{display:inline-flex;align-items:center;gap:7px;margin-top:8px;font-size:.78rem;color:var(--txt-dim);cursor:pointer;user-select:none}
+.done-chk input,.chk-in{accent-color:var(--green);width:16px;height:16px;cursor:pointer}
+.steps li.done::before{content:"✓";border-color:var(--green);color:var(--green);box-shadow:0 0 10px rgba(34,197,94,.3)}
+.steps li.done .done-chk{color:var(--green)}
+.chk li.has-cb::before{display:none}
+.chk li .chk-in{position:absolute;left:4px;top:10px}
+.chk li.done{color:var(--txt-dim);text-decoration:line-through;text-decoration-color:rgba(34,197,94,.6)}
+
+/* --- buscador --- */
+.s-ov{
+  position:fixed;inset:0;z-index:1500;background:rgba(3,7,15,.72);backdrop-filter:blur(4px);
+  display:flex;align-items:flex-start;justify-content:center;padding:8vh 14px 14px;
+}
+.s-ov[hidden]{display:none}
+.s-box{
+  width:100%;max-width:680px;max-height:82vh;display:flex;flex-direction:column;
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.9);overflow:hidden;
+}
+.s-top{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--border)}
+.s-top input{
+  flex:1;min-width:0;background:var(--bg);border:1px solid var(--border);color:var(--txt);
+  border-radius:9px;padding:10px 12px;font-family:inherit;font-size:1rem;
+}
+.s-top input:focus{outline:2px solid var(--cyan);outline-offset:0}
+.s-filters{display:flex;gap:6px;padding:8px 12px 0}
+.s-f{
+  background:transparent;border:1px solid var(--border);color:var(--txt-dim);
+  border-radius:999px;padding:4px 12px;font-family:inherit;font-size:.74rem;font-weight:700;cursor:pointer;
+}
+.s-f.active{color:var(--cyan);border-color:var(--cyan)}
+.s-res{overflow-y:auto;padding:8px 8px 6px;flex:1}
+.s-item{
+  display:block;width:100%;text-align:left;background:transparent;
+  border:1px solid transparent;border-radius:9px;padding:9px 11px;margin-bottom:3px;
+  cursor:pointer;color:var(--txt);font-family:inherit;
+}
+.s-item.sel{background:rgba(0,212,255,.08);border-color:rgba(0,212,255,.3)}
+.s-meta{font-size:.68rem;letter-spacing:.8px;text-transform:uppercase;color:var(--txt-dim)}
+.s-meta b{color:var(--cyan)}
+.s-item.prompt .s-meta b{color:var(--purple)}
+.s-title{font-weight:700;font-size:.9rem;margin:1px 0 2px}
+.s-snip{font-size:.8rem;color:var(--txt-dim);line-height:1.45}
+.s-snip mark{background:rgba(245,158,11,.35);color:inherit;border-radius:3px;padding:0 1px}
+.s-empty{padding:18px;text-align:center;color:var(--txt-dim);font-size:.88rem}
+.s-hint{padding:7px 12px;border-top:1px solid var(--border);font-size:.7rem;color:var(--txt-dim);text-align:center}
+
+/* --- modo claro --- */
+:root[data-theme="light"]{
+  --bg:#f3f6fb;--card:#ffffff;--border:#c8d5e6;
+  --cyan:#0369a1;--green:#15803d;--amber:#b45309;--red:#b91c1c;--purple:#7e22ce;
+  --txt:#1c2b40;--txt-dim:#566a86;
+}
+[data-theme="light"] body::before{opacity:.55}
+[data-theme="light"] #progressWrap{background:rgba(160,180,205,.4)}
+[data-theme="light"] #navbar{background:rgba(255,255,255,.94)}
+[data-theme="light"] #navbar::-webkit-scrollbar-thumb{background:#b8c8de}
+[data-theme="light"] .nav-btn.active{color:#fff;background:linear-gradient(135deg,#0369a1,#0ea5e9);box-shadow:0 0 12px rgba(3,105,161,.35)}
+[data-theme="light"] .nav-btn.nav-credits.active{color:#fff;background:linear-gradient(135deg,#7e22ce,#a855f7)}
+[data-theme="light"] .nav-btn.nav-fuentes.active{color:#fff;background:linear-gradient(135deg,#15803d,#22c55e)}
+[data-theme="light"] .nav-btn.nav-credits:hover{color:#6b21a8}
+[data-theme="light"] .nav-btn.nav-fuentes:hover{color:#166534}
+[data-theme="light"] .home-hero{background:linear-gradient(160deg,#ffffff 0%,#f3f7fc 60%,#eaf1f9 100%)}
+[data-theme="light"] .home-topbar{background:rgba(255,255,255,.75)}
+[data-theme="light"] .home-title{background:linear-gradient(100deg,#0b1f3a 0%,var(--cyan) 50%,var(--purple) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+[data-theme="light"] .quote{color:#7a4a00}
+[data-theme="light"] .metric,[data-theme="light"] .flow-node,[data-theme="light"] .chip{background:#fff}
+[data-theme="light"] .sec-head h2,[data-theme="light"] strong,[data-theme="light"] .steps li b,[data-theme="light"] .src-card h4,[data-theme="light"] .credit-item .v:not(.cy):not(.pu){color:#0b1f3a}
+[data-theme="light"] em{color:#3b4f6b}
+[data-theme="light"] .card h4{color:#12263f}
+[data-theme="light"] .callout.info{color:#075985}
+[data-theme="light"] .callout.example{color:#14532d}
+[data-theme="light"] .callout.warn{color:#7a4a00}
+[data-theme="light"] .callout.error{color:#7f1d1d}
+[data-theme="light"] pre,[data-theme="light"] .flow{background:#f1f5fa}
+[data-theme="light"] pre{color:#075985}
+[data-theme="light"] code{color:#075985;background:rgba(3,105,161,.08);border-color:rgba(3,105,161,.25)}
+[data-theme="light"] .prompt-box{background:#faf5ff;color:#4c1d95}
+[data-theme="light"] .pv{background:rgba(126,34,206,.14)}
+[data-theme="light"] td{border-bottom-color:rgba(160,180,205,.5)}
+[data-theme="light"] .steps li{border-left-color:rgba(160,180,205,.9)}
+[data-theme="light"] .chk li{border-bottom-color:rgba(160,180,205,.6)}
+[data-theme="light"] .lp-bar{background:rgba(160,180,205,.5)}
+[data-theme="light"] footer{background:rgba(255,255,255,.95)}
+[data-theme="light"] #toTop{color:#fff;background:linear-gradient(140deg,#0369a1,#0ea5e9)}
+[data-theme="light"] .s-ov{background:rgba(20,30,50,.45)}
+
+/* --- impresión / PDF: todos los capítulos, sin interfaz --- */
+@media print{
+  @page{margin:14mm}
+  #progressWrap,#navbar,#toTop,.pager,.tools,.copy-btn,.pv-row,.list-progress,.done-chk,
+  .copyall-row,.origin-link-row,.s-ov,#toast,.svg-holder{display:none!important}
+  body::before{display:none}
+  body{background:#fff}
+  main{padding:0;max-width:none}
+  .section{display:block!important;animation:none;break-before:page;page-break-before:always}
+  #inicio{break-before:auto;page-break-before:auto}
+  .card,.src-card,.credit-item,.callout,.prompt-box,.flow{break-inside:avoid;page-break-inside:avoid}
+  .acc-body{max-height:none!important}
+  a{color:inherit;text-decoration:underline}
+  code.cpy::after{content:none}
+}
+</style>
+<script>try{var __t=localStorage.getItem("iaTut:theme");if(__t==="light"||__t==="dark")document.documentElement.setAttribute("data-theme",__t);var __z=parseInt(localStorage.getItem("iaTut:font"),10);if(__z>=90&&__z<=145&&__z!==100)document.documentElement.style.fontSize=__z+"%";}catch(e){}</script>
+</head>
+<body>
+
+<!-- ============ PROGRESS ============ -->
+<div id="progressWrap"><div id="progressBar"></div></div>
+
+<!-- ============ NAVBAR ============ -->
+<nav id="navbar">
+  <div class="brand"><span class="dot"></span>IA&nbsp;PRO</div>
+  <div class="tools" role="group" aria-label="Herramientas del tutorial">
+    <button type="button" class="tool-btn" id="searchBtn" title="Buscar (tecla / o Ctrl+K)" aria-label="Buscar en el tutorial">🔍</button>
+    <button type="button" class="tool-btn" id="fontDown" title="Reducir tamaño de letra" aria-label="Reducir tamaño de letra">A−</button>
+    <button type="button" class="tool-btn" id="fontUp" title="Aumentar tamaño de letra" aria-label="Aumentar tamaño de letra">A+</button>
+    <button type="button" class="tool-btn" id="themeBtn" title="Cambiar a modo claro" aria-label="Cambiar tema">☀</button>
+    <button type="button" class="tool-btn" id="printBtn" title="Imprimir o guardar como PDF (todos los capítulos)" aria-label="Imprimir o guardar como PDF">🖨</button>
+  </div>
+  <button class="nav-btn active" data-target="inicio">INICIO</button>
+  <button class="nav-btn" data-target="cap1">1 · Introducción</button>
+  <button class="nav-btn" data-target="cap2">2 · Herramientas</button>
+  <button class="nav-btn" data-target="cap3">3 · Mail Meteor</button>
+  <button class="nav-btn" data-target="cap4">4 · ChatGoat</button>
+  <button class="nav-btn" data-target="cap5">5 · Programación</button>
+  <button class="nav-btn" data-target="cap6">6 · Imágenes</button>
+  <button class="nav-btn" data-target="cap7">7 · Síntesis</button>
+  <button class="nav-btn" data-target="cap8">8 · Prompts y Video</button>
+  <button class="nav-btn nav-fuentes" data-target="fuentes">FUENTES</button>
+  <button class="nav-btn nav-credits" data-target="creditos">CRÉDITOS</button>
+</nav>
+
+<main>
+
+<!-- ==================================================================== -->
+<!-- ============================== INICIO ============================== -->
+<!-- ==================================================================== -->
+<section class="section active" id="inicio">
+
+  <div class="home-hero">
+
+    <!-- ====== SVG ANIMADO — PORTADA ====== -->
+    <div class="svg-holder" id="homeSvgHolder">
+      <svg id="coverSvg" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Portada animada: alias de correo, plataforma ChatGoat y modelos de IA generando código, dashboards e imágenes sin límites">
+        <defs>
+          <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#070b14">
+              <animate attributeName="stop-color" values="#070b14;#0c1424;#0a1020;#070b14" dur="9s" repeatCount="indefinite"/>
+            </stop>
+            <stop offset="55%" stop-color="#0a0e1a">
+              <animate attributeName="stop-color" values="#0a0e1a;#101c30;#0b1424;#0a0e1a" dur="9s" repeatCount="indefinite"/>
+            </stop>
+            <stop offset="100%" stop-color="#0d0a1c">
+              <animate attributeName="stop-color" values="#0d0a1c;#16112e;#0e0b20;#0d0a1c" dur="9s" repeatCount="indefinite"/>
+            </stop>
+          </linearGradient>
+
+          <radialGradient id="hubGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.85"/>
+            <stop offset="55%" stop-color="#00d4ff" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+          </radialGradient>
+
+          <radialGradient id="haloCyan" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="haloGreen" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#22c55e" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="haloPurple" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#a855f7" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="haloAmber" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+          </radialGradient>
+
+          <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+            <path d="M25 0 L0 0 0 25" fill="none" stroke="#1e3a5f" stroke-width="0.6"/>
+          </pattern>
+
+          <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="3.2" result="b"/>
+            <feMerge>
+              <feMergeNode in="b"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <filter id="glowSoft" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="6" result="b2"/>
+            <feMerge>
+              <feMergeNode in="b2"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+
+          <!-- Paths narrativos -->
+          <path id="pIn"   d="M 185 225 C 255 225, 285 225, 340 225"/>
+          <path id="pOut1" d="M 458 172 C 512 140, 560 116, 604 108"/>
+          <path id="pOut2" d="M 460 225 C 518 225, 560 225, 604 225"/>
+          <path id="pOut3" d="M 458 278 C 512 310, 560 336, 604 344"/>
+          <path id="pLoop" d="M 400 360 C 300 400, 180 390, 120 330 C 60 270, 90 180, 170 150 C 250 120, 330 130, 400 92"/>
+        </defs>
+
+        <!-- FONDO -->
+        <rect width="800" height="450" fill="url(#bgGrad)"/>
+        <rect width="800" height="450" fill="url(#grid)" opacity="0.35">
+          <animate attributeName="opacity" values="0.18;0.42;0.18" dur="6s" repeatCount="indefinite"/>
+        </rect>
+
+        <!-- ANILLOS ORBITALES CONCÉNTRICOS -->
+        <g transform="translate(400,225)">
+          <circle r="150" fill="none" stroke="#00d4ff" stroke-width="1" stroke-dasharray="10 22" opacity="0.35">
+            <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="34s" repeatCount="indefinite"/>
+            <animate attributeName="stroke-dasharray" values="10 22;26 12;10 22" dur="8s" repeatCount="indefinite"/>
+          </circle>
+          <circle r="118" fill="none" stroke="#a855f7" stroke-width="1.1" stroke-dasharray="6 16" opacity="0.4">
+            <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="24s" repeatCount="indefinite"/>
+            <animate attributeName="stroke-dasharray" values="6 16;18 8;6 16" dur="6s" repeatCount="indefinite"/>
+          </circle>
+          <circle r="90" fill="none" stroke="#22c55e" stroke-width="0.9" stroke-dasharray="3 11" opacity="0.35">
+            <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="17s" repeatCount="indefinite"/>
+          </circle>
+          <circle r="176" fill="none" stroke="#f59e0b" stroke-width="0.7" stroke-dasharray="2 26" opacity="0.28">
+            <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="45s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+
+        <!-- HALO CENTRAL -->
+        <circle cx="400" cy="225" r="118" fill="url(#hubGrad)" opacity="0.55">
+          <animate attributeName="opacity" values="0.35;0.75;0.35" dur="4s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- TÍTULO SUPERIOR -->
+        <text x="32" y="42" font-family="Segoe UI, system-ui, sans-serif" font-size="15" font-weight="800" letter-spacing="3.5" fill="#00d4ff" filter="url(#glow)">
+          USO ILIMITADO DE IA PRO
+          <animate attributeName="fill" values="#00d4ff;#a855f7;#22c55e;#f59e0b;#00d4ff" dur="11s" repeatCount="indefinite"/>
+        </text>
+        <text x="32" y="62" font-family="Segoe UI, system-ui, sans-serif" font-size="9.5" letter-spacing="2.2" fill="#8ba0bd" opacity="0.85">
+          ALIAS · MAIL METEOR · CHATGOAT · GPT-6 ASTRA · IMAGEN 2.5
+          <animate attributeName="opacity" values="0.4;1;0.4" dur="4.5s" repeatCount="indefinite"/>
+        </text>
+
+        <!-- INDICADOR LIVE -->
+        <g transform="translate(700,32)">
+          <rect x="0" y="-13" width="72" height="24" rx="12" fill="rgba(239,68,68,0.13)" stroke="#ef4444" stroke-width="1">
+            <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite"/>
+          </rect>
+          <circle cx="14" cy="-1" r="4" fill="#ef4444">
+            <animate attributeName="r" values="3;5;3" dur="1.6s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.35;1" dur="1.6s" repeatCount="indefinite"/>
+          </circle>
+          <text x="26" y="3" font-family="Segoe UI, sans-serif" font-size="9.5" font-weight="800" letter-spacing="1.4" fill="#ef4444">LIVE</text>
+        </g>
+
+        <!-- ================= NODO IZQUIERDA: ALIAS ================= -->
+        <g>
+          <animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="4.2s" repeatCount="indefinite"/>
+          <circle cx="120" cy="225" r="56" fill="url(#haloCyan)" opacity="0.5">
+            <animate attributeName="opacity" values="0.25;0.65;0.25" dur="3.4s" repeatCount="indefinite"/>
+          </circle>
+          <rect x="62" y="185" width="116" height="80" rx="12" fill="#0f172a" stroke="#00d4ff" stroke-width="1.5" filter="url(#glow)">
+            <animate attributeName="stroke-opacity" values="1;0.45;1" dur="3.2s" repeatCount="indefinite"/>
+          </rect>
+          <!-- sobre -->
+          <rect x="80" y="204" width="80" height="42" rx="5" fill="none" stroke="#00d4ff" stroke-width="1.6"/>
+          <path d="M 80 205 L 120 228 L 160 205" fill="none" stroke="#00d4ff" stroke-width="1.6" filter="url(#glow)">
+            <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2.5s" repeatCount="indefinite"/>
+          </path>
+          <text x="120" y="266" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="9.5" font-weight="800" letter-spacing="1.5" fill="#00d4ff">2048 ALIAS</text>
+        </g>
+
+        <!-- mini-alias orbitando -->
+        <g transform="translate(120,225)">
+          <circle r="72" fill="none" stroke="#00d4ff" stroke-width="0.8" stroke-dasharray="4 12" opacity="0.45">
+            <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="12s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="72" cy="0" r="3.2" fill="#00d4ff" filter="url(#glow)">
+            <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="12s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+
+        <!-- ================= NODO CENTRAL: CHATGOAT ================= -->
+        <g>
+          <polygon points="400,150 465,187 465,262 400,300 335,262 335,187" fill="rgba(15,23,42,0.94)" stroke="#00d4ff" stroke-width="2" filter="url(#glowSoft)">
+            <animate attributeName="stroke" values="#00d4ff;#a855f7;#00d4ff" dur="7s" repeatCount="indefinite"/>
+          </polygon>
+          <polygon points="400,164 452,194 452,255 400,286 348,255 348,194" fill="none" stroke="#1e3a5f" stroke-width="1" stroke-dasharray="5 7">
+            <animateTransform attributeName="transform" type="rotate" from="0 400 225" to="360 400 225" dur="20s" repeatCount="indefinite"/>
+          </polygon>
+          <text x="400" y="220" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" font-weight="900" letter-spacing="1.6" fill="#00d4ff" filter="url(#glow)">CHATGOAT</text>
+          <text x="400" y="238" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8" letter-spacing="2" fill="#8ba0bd">PLATAFORMA MULTI-MODELO</text>
+          <text x="400" y="254" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8.5" font-weight="700" letter-spacing="1.4" fill="#22c55e">
+            <animate attributeName="fill" values="#22c55e;#00d4ff;#a855f7;#22c55e" dur="6s" repeatCount="indefinite"/>
+            ACCESO PRO
+          </text>
+        </g>
+
+        <!-- anillo giratorio alrededor del hub -->
+        <g transform="translate(400,225)">
+          <ellipse rx="86" ry="34" fill="none" stroke="#a855f7" stroke-width="1.2" stroke-dasharray="8 14" opacity="0.7">
+            <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="9s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse rx="34" ry="86" fill="none" stroke="#22c55e" stroke-width="1.2" stroke-dasharray="8 14" opacity="0.65">
+            <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="13s" repeatCount="indefinite"/>
+          </ellipse>
+        </g>
+
+        <!-- ================= NODOS DERECHA: SALIDAS ================= -->
+        <!-- CÓDIGO / JUEGO -->
+        <g>
+          <animateTransform attributeName="transform" type="translate" values="0 0;0 -2.5;0 0" dur="3.1s" repeatCount="indefinite"/>
+          <circle cx="666" cy="108" r="46" fill="url(#haloGreen)" opacity="0.45">
+            <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3.7s" repeatCount="indefinite"/>
+          </circle>
+          <rect x="620" y="86" width="92" height="46" rx="9" fill="#0f172a" stroke="#22c55e" stroke-width="1.4" filter="url(#glow)">
+            <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="2.7s" repeatCount="indefinite"/>
+          </rect>
+          <text x="666" y="106" text-anchor="middle" font-family="Consolas, monospace" font-size="10" font-weight="700" fill="#22c55e">&lt;/&gt; CÓDIGO</text>
+          <text x="666" y="121" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="7.5" letter-spacing="1.2" fill="#8ba0bd">JUEGOS · 3D · .HTML</text>
+        </g>
+
+        <!-- DASHBOARD -->
+        <g>
+          <animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="4.6s" repeatCount="indefinite"/>
+          <circle cx="666" cy="225" r="46" fill="url(#haloCyan)" opacity="0.45">
+            <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3.1s" repeatCount="indefinite"/>
+          </circle>
+          <rect x="620" y="203" width="92" height="46" rx="9" fill="#0f172a" stroke="#00d4ff" stroke-width="1.4" filter="url(#glow)">
+            <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.4s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="630" y="226" width="7" height="15" fill="#00d4ff">
+            <animate attributeName="height" values="8;17;8" dur="2.2s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="233;224;233" dur="2.2s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="642" y="220" width="7" height="21" fill="#a855f7">
+            <animate attributeName="height" values="16;9;16" dur="2.7s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="225;232;225" dur="2.7s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="654" y="224" width="7" height="17" fill="#22c55e">
+            <animate attributeName="height" values="11;20;11" dur="3.2s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="230;221;230" dur="3.2s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="666" y="217" width="7" height="24" fill="#f59e0b">
+            <animate attributeName="height" values="19;10;19" dur="1.9s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="222;231;222" dur="1.9s" repeatCount="indefinite"/>
+          </rect>
+          <text x="666" y="214" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="8.5" font-weight="800" letter-spacing="1.1" fill="#00d4ff">DASHBOARD</text>
+        </g>
+
+        <!-- IMAGEN -->
+        <g>
+          <animateTransform attributeName="transform" type="translate" values="0 0;0 -2.8;0 0" dur="3.8s" repeatCount="indefinite"/>
+          <circle cx="666" cy="344" r="46" fill="url(#haloAmber)" opacity="0.45">
+            <animate attributeName="opacity" values="0.2;0.6;0.2" dur="4.1s" repeatCount="indefinite"/>
+          </circle>
+          <rect x="620" y="322" width="92" height="46" rx="9" fill="#0f172a" stroke="#f59e0b" stroke-width="1.4" filter="url(#glow)">
+            <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="2.9s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="632" y="332" width="24" height="20" rx="3" fill="none" stroke="#f59e0b" stroke-width="1.2"/>
+          <circle cx="638" cy="338" r="2.6" fill="#f59e0b">
+            <animate attributeName="opacity" values="1;0.3;1" dur="2.4s" repeatCount="indefinite"/>
+          </circle>
+          <path d="M 632 350 L 641 341 L 648 347 L 656 338 L 656 352 L 632 352 Z" fill="#f59e0b" opacity="0.65">
+            <animate attributeName="opacity" values="0.4;0.9;0.4" dur="3.6s" repeatCount="indefinite"/>
+          </path>
+          <text x="678" y="340" font-family="Segoe UI, sans-serif" font-size="8.5" font-weight="800" letter-spacing="1.1" fill="#f59e0b">IMAGEN 2.5</text>
+          <text x="678" y="352" font-family="Segoe UI, sans-serif" font-size="7" letter-spacing="1" fill="#8ba0bd">MARTE · PLAYA</text>
+        </g>
+
+        <!-- ================= PATHS DE FLUJO ================= -->
+        <g fill="none" stroke-width="1.8" stroke-linecap="round">
+          <use href="#pIn" stroke="#00d4ff" opacity="0.55">
+            <animate attributeName="stroke-dashoffset" from="120" to="0" dur="2.4s" repeatCount="indefinite"/>
+          </use>
+          <use href="#pOut1" stroke="#22c55e" opacity="0.5">
+            <animate attributeName="stroke-dashoffset" from="120" to="0" dur="2.9s" repeatCount="indefinite"/>
+          </use>
+          <use href="#pOut2" stroke="#00d4ff" opacity="0.5">
+            <animate attributeName="stroke-dashoffset" from="120" to="0" dur="3.3s" repeatCount="indefinite"/>
+          </use>
+          <use href="#pOut3" stroke="#f59e0b" opacity="0.5">
+            <animate attributeName="stroke-dashoffset" from="120" to="0" dur="3.7s" repeatCount="indefinite"/>
+          </use>
+        </g>
+        <g fill="none" stroke-width="1.4" stroke-dasharray="6 10" opacity="0.4">
+          <use href="#pIn" stroke="#00d4ff"/>
+          <use href="#pOut1" stroke="#22c55e"/>
+          <use href="#pOut2" stroke="#00d4ff"/>
+          <use href="#pOut3" stroke="#f59e0b"/>
+        </g>
+
+        <!-- ================= PARTÍCULAS EN MOVIMIENTO ================= -->
+        <!-- entrada: alias -> hub -->
+        <circle r="3" fill="#00d4ff" filter="url(#glow)">
+          <animateMotion dur="2.6s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+            <mpath href="#pIn"/>
+          </animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" dur="2.6s" repeatCount="indefinite"/>
+        </circle>
+        <circle r="2.2" fill="#a855f7" filter="url(#glow)">
+          <animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+            <mpath href="#pIn"/>
+          </animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" dur="2.6s" begin="1.3s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- salida 1 -->
+        <circle r="3" fill="#22c55e" filter="url(#glow)">
+          <animateMotion dur="2.9s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+            <mpath href="#pOut1"/>
+          </animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" dur="2.9s" repeatCount="indefinite"/>
+        </circle>
+        <circle r="2" fill="#22c55e" filter="url(#glow)">
+          <animateMotion dur="2.9s" begin="1.5s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+            <mpath href="#pOut1"/>
+          </animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" dur="2.9s" begin="1.5s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- salida 2 -->
+        <circle r="3" fill="#00d4ff" filter="url(#glow)">
+          <animateMotion dur="3.3s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+            <mpath href="#pOut2"/>
+          </animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" dur="3.3s" repeatCount="indefinite"/>
+        </circle>
+        <circle r="2.2" fill="#a855f7" filter="url(#glow)">
+          <animateMotion dur="3.3s" begin="1.7s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+            <mpath href="#pOut2"/>
+          </animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" dur="3.3s" begin="1.7s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- salida 3 -->
+        <circle r="3" fill="#f59e0b" filter="url(#glow)">
+          <animateMotion dur="3.7s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+            <mpath href="#pOut3"/>
+          </animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" dur="3.7s" repeatCount="indefinite"/>
+        </circle>
+        <circle r="2" fill="#ef4444" filter="url(#glow)">
+          <animateMotion dur="3.7s" begin="1.9s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+            <mpath href="#pOut3"/>
+          </animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" dur="3.7s" begin="1.9s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- ================= GHOST ELEMENTS ================= -->
+        <!-- ghost: alias que viaja al hub -->
+        <g opacity="0">
+          <animateMotion dur="4.4s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+            <mpath href="#pIn"/>
+          </animateMotion>
+          <animate attributeName="opacity" values="0;0.85;0.85;0" dur="4.4s" repeatCount="indefinite"/>
+          <rect x="-13" y="-9" width="26" height="18" rx="3" fill="none" stroke="#00d4ff" stroke-width="1.3" stroke-dasharray="3 3"/>
+          <path d="M -13 -9 L 0 2 L 13 -9" fill="none" stroke="#00d4ff" stroke-width="1.2"/>
+        </g>
+        <!-- ghost: código -->
+        <g opacity="0">
+          <animateMotion dur="5.2s" begin="0.8s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+            <mpath href="#pOut1"/>
+          </animateMotion>
+          <animate attributeName="opacity" values="0;0.8;0.8;0" dur="5.2s" begin="0.8s" repeatCount="indefinite"/>
+          <rect x="-13" y="-9" width="26" height="18" rx="3" fill="none" stroke="#22c55e" stroke-width="1.3" stroke-dasharray="3 3"/>
+          <text x="0" y="4" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#22c55e">&lt;/&gt;</text>
+        </g>
+        <!-- ghost: dashboard -->
+        <g opacity="0">
+          <animateMotion dur="5.8s" begin="1.6s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+            <mpath href="#pOut2"/>
+          </animateMotion>
+          <animate attributeName="opacity" values="0;0.8;0.8;0" dur="5.8s" begin="1.6s" repeatCount="indefinite"/>
+          <rect x="-13" y="-9" width="26" height="18" rx="3" fill="none" stroke="#00d4ff" stroke-width="1.3" stroke-dasharray="3 3"/>
+          <path d="M -7 3 L -2 -3 L 3 3 L 8 -4" fill="none" stroke="#00d4ff" stroke-width="1.2"/>
+        </g>
+        <!-- ghost: imagen -->
+        <g opacity="0">
+          <animateMotion dur="6.2s" begin="2.4s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+            <mpath href="#pOut3"/>
+          </animateMotion>
+          <animate attributeName="opacity" values="0;0.8;0.8;0" dur="6.2s" begin="2.4s" repeatCount="indefinite"/>
+          <rect x="-13" y="-9" width="26" height="18" rx="3" fill="none" stroke="#f59e0b" stroke-width="1.3" stroke-dasharray="3 3"/>
+          <circle cx="-5" cy="-3" r="2.4" fill="none" stroke="#f59e0b" stroke-width="1"/>
+          <path d="M -11 7 L -3 -1 L 2 4 L 7 -3 L 11 7 Z" fill="none" stroke="#f59e0b" stroke-width="1"/>
+        </g>
+
+        <!-- ================= NODOS PARPADEANTES ================= -->
+        <circle cx="200" cy="225" r="5" fill="#00d4ff" filter="url(#glow)">
+          <animate attributeName="r" values="3;7;3" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="600" cy="108" r="4" fill="#22c55e" filter="url(#glow)">
+          <animate attributeName="r" values="2.5;5.5;2.5" dur="2.6s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="1;0.3;1" dur="2.6s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="600" cy="225" r="4" fill="#00d4ff" filter="url(#glow)">
+          <animate attributeName="r" values="2.5;5.5;2.5" dur="3.1s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="1;0.3;1" dur="3.1s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="600" cy="344" r="4" fill="#f59e0b" filter="url(#glow)">
+          <animate attributeName="r" values="2.5;5.5;2.5" dur="2.3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="1;0.3;1" dur="2.3s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- ================= EXPLOSIONES RADIALES ================= -->
+        <g transform="translate(666,108)" stroke="#22c55e" stroke-width="1.4" stroke-linecap="round" fill="none">
+          <g opacity="0">
+            <animate attributeName="opacity" values="0;1;0" dur="3.4s" repeatCount="indefinite"/>
+            <line x1="0" y1="0" x2="0" y2="0">
+              <animate attributeName="y2" values="-18;-42" dur="3.4s" repeatCount="indefinite"/>
+            </line>
+            <line x1="0" y1="0" x2="0" y2="0" transform="rotate(45)">
+              <animate attributeName="y2" values="-14;-34" dur="3.4s" repeatCount="indefinite"/>
+            </line>
+            <line x1="0" y1="0" x2="0" y2="0" transform="rotate(-45)">
+              <animate attributeName="y2" values="-14;-34" dur="3.4s" repeatCount="indefinite"/>
+            </line>
+            <line x1="0" y1="0" x2="0" y2="0" transform="rotate(90)">
+              <animate attributeName="y2" values="-18;-42" dur="3.4s" repeatCount="indefinite"/>
+            </line>
+            <line x1="0" y1="0" x2="0" y2="0" transform="rotate(135)">
+              <animate attributeName="y2" values="-12;-30" dur="3.4s" repeatCount="indefinite"/>
+            </line>
+            <line x1="0" y1="0" x2="0" y2="0" transform="rotate(-135)">
+              <animate attributeName="y2" values="-12;-30" dur="3.4s" repeatCount="indefinite"/>
+            </line>
+          </g>
+        </g>
+        <g transform="translate(666,344)" stroke="#f59e0b" stroke-width="1.4" stroke-linecap="round" fill="none">
+          <g opacity="0">
+            <animate attributeName="opacity" values="0;1;0" dur="4.1s" begin="1.2s" repeatCount="indefinite"/>
+            <line x1="0" y1="0" x2="0" y2="0">
+              <animate attributeName="y2" values="-16;-38" dur="4.1s" begin="1.2s" repeatCount="indefinite"/>
+            </line>
+            <line x1="0" y1="0" x2="0" y2="0" transform="rotate(60)">
+              <animate attributeName="y2" values="-14;-32" dur="4.1s" begin="1.2s" repeatCount="indefinite"/>
+            </line>
+            <line x1="0" y1="0" x2="0" y2="0" transform="rotate(-60)">
+              <animate attributeName="y2" values="-14;-32" dur="4.1s" begin="1.2s" repeatCount="indefinite"/>
+            </line>
+            <line x1="0" y1="0" x2="0" y2="0" transform="rotate(120)">
+              <animate attributeName="y2" values="-16;-38" dur="4.1s" begin="1.2s" repeatCount="indefinite"/>
+            </line>
+          </g>
+        </g>
+
+        <!-- ================= FLASH CENTRAL ================= -->
+        <g>
+          <circle cx="400" cy="225" r="40" fill="none" stroke="#ffffff" stroke-width="2" opacity="0">
+            <animate attributeName="r" values="30;110" dur="6.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;0;0.55;0;0" dur="6.5s" repeatCount="indefinite"/>
+            <animate attributeName="stroke-width" values="3;0.4" dur="6.5s" repeatCount="indefinite"/>
+          </circle>
+          <text x="400" y="415" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="26" font-weight="900" letter-spacing="7" fill="#ffffff" filter="url(#glowSoft)" opacity="0">
+            SIN LÍMITES
+            <animate attributeName="opacity" values="0;0;0;0.95;0.95;0" dur="6.5s" repeatCount="indefinite"/>
+            <animate attributeName="letter-spacing" values="7;13;7" dur="6.5s" repeatCount="indefinite"/>
+            <animate attributeName="fill" values="#ffffff;#00d4ff;#a855f7;#ffffff" dur="6.5s" repeatCount="indefinite"/>
+          </text>
+        </g>
+
+        <!-- ================= ETIQUETAS DE ESTADO ================= -->
+        <g transform="translate(32,400)">
+          <text font-family="Segoe UI, sans-serif" font-size="9.5" font-weight="800" letter-spacing="1.8" fill="#22c55e">
+            <animate attributeName="opacity" values="1;0;0;0;1" dur="6s" repeatCount="indefinite"/>
+            ESTADO: ACCESO CONCEDIDO
+          </text>
+          <text font-family="Segoe UI, sans-serif" font-size="9.5" font-weight="800" letter-spacing="1.8" fill="#00d4ff" opacity="0">
+            <animate attributeName="opacity" values="0;1;0;0;0" dur="6s" repeatCount="indefinite"/>
+            ESTADO: GENERANDO…
+          </text>
+          <text font-family="Segoe UI, sans-serif" font-size="9.5" font-weight="800" letter-spacing="1.8" fill="#a855f7" opacity="0">
+            <animate attributeName="opacity" values="0;0;0;1;0" dur="6s" repeatCount="indefinite"/>
+            ESTADO: RENOVANDO ALIAS
+          </text>
+        </g>
+
+        <!-- FIRMA -->
+        <text x="768" y="425" text-anchor="end" font-family="Segoe UI, sans-serif" font-size="9" letter-spacing="2" fill="#8ba0bd">
+          RUBÉN SBARSKY
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="5s" repeatCount="indefinite"/>
+        </text>
+
+        <!-- ETIQUETA INFERIOR DERECHA -->
+        <text x="768" y="440" text-anchor="end" font-family="Segoe UI, sans-serif" font-size="7.5" letter-spacing="1.4" fill="#1e3a5f">
+          TUTORIAL EDUCATIVO · DARK UI · SVG AUTÓNOMO
+        </text>
+      </svg>
+    </div>
+    <!-- ====== FIN SVG ====== -->
+
+    <div class="home-topbar">
+      <span class="badge"><span class="live"></span> Tutorial Interactivo</span>
+      <span class="badge green">HTML · CSS · JS · SVG</span>
+      <span class="badge purple">Sin Dependencias Externas</span>
+    </div>
+
+    <div class="home-title-block">
+      <h1 class="home-title">Uso Ilimitado y Gratuito de Modelos Avanzados de IA</h1>
+      <p class="home-sub">Estrategia de alias de correo para renovar sesiones en plataformas PRO</p>
+    </div>
+
+    <div class="home-desc">
+      Tutorial completo sobre la estrategia basada en <strong>alias de correo electrónico</strong> para renovar
+      sesiones de acceso y utilizar modelos avanzados de inteligencia artificial —como
+      <strong>GPT-6 Astra</strong>, <strong>Claude Fabel 5.1</strong> e <strong>Imagen 2.5</strong>—
+      de forma completamente gratuita e ilimitada.
+    </div>
+
+    <blockquote class="quote">
+      "Si no puedes explicarlo de forma sencilla, es que no lo entiendes lo suficientemente bien."
+    </blockquote>
+
+    <div class="metrics">
+      <div class="metric"><b>8</b><span>Capítulos</span></div>
+      <div class="metric"><b>2048</b><span>Alias posibles</span></div>
+      <div class="metric"><b>5</b><span>Prompts exactos</span></div>
+      <div class="metric"><b>10</b><span>Errores a evitar</span></div>
+      <div class="metric"><b>3</b><span>Herramientas</span></div>
+    </div>
+
+    <div class="home-topbar" style="border-top:1px solid var(--border);border-bottom:none">
+      <span class="badge">📅 29/09/2026</span>
+      <span class="badge">🕐 05:56:16</span>
+      <span class="badge green">👨‍💻 Rubén Sbarsky</span>
+    </div>
+
+  </div>
+
+  <!-- ÍNDICE RÁPIDO -->
+  <div class="card">
+    <h3><span class="num">ÍNDICE</span> Contenido del Tutorial</h3>
+    <div class="grid2">
+      <ul>
+        <li><a href="#" data-goto="cap1">Capítulo 1 — Introducción a la IA Avanzada y el Problema de los Límites</a></li>
+        <li><a href="#" data-goto="cap2">Capítulo 2 — Herramientas Necesarias y Flujo de Trabajo</a></li>
+        <li><a href="#" data-goto="cap3">Capítulo 3 — Generación de Alias con Mail Meteor</a></li>
+        <li><a href="#" data-goto="cap4">Capítulo 4 — Autenticación Ilimitada en ChatGoat</a></li>
+      </ul>
+      <ul>
+        <li><a href="#" data-goto="cap5">Capítulo 5 — Casos Prácticos de Programación y Desarrollo Web</a></li>
+        <li><a href="#" data-goto="cap6">Capítulo 6 — Generación Ilimitada de Imágenes con Imagen 2.5</a></li>
+        <li><a href="#" data-goto="cap7">Capítulo 7 — Síntesis, Ejercicios, Errores y Glosario</a></li>
+        <li><a href="#" data-goto="cap8">Capítulo 8 — Recopilatorio de Prompts, Video y Fuentes</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">TIPS</span> Herramientas de este tutorial</h3>
+    <ul>
+      <li><strong>🔍 Buscar</strong> (también con la tecla <code>/</code> o Ctrl+K): encuentra capítulos, secciones y prompts por palabra clave.</li>
+      <li><strong>Copy</strong> en cada prompt, y bajo cada uno un campo para <strong>personalizarlo</strong> antes de copiarlo. Haz clic en nombres de archivo como <code>game.html</code> para copiarlos.</li>
+      <li><strong>Marcar como hecho</strong> en los pasos y en la lista de comprobación: tu progreso se guarda en este navegador y los capítulos completados muestran una marca ✓ arriba.</li>
+      <li><strong>A− / A+</strong> cambian el tamaño de letra, <strong>☀ / 🌙</strong> alterna modo claro y oscuro, y <strong>🖨</strong> imprime o guarda en PDF todos los capítulos.</li>
+    </ul>
+  </div>
+
+</section>
+
+<!-- ==================================================================== -->
+<!-- ============================ CAPÍTULO 1 ============================ -->
+<!-- ==================================================================== -->
+<section class="section" id="cap1">
+  <div class="sec-head">
+    <div class="sec-icon">🧠</div>
+    <div>
+      <h2>Capítulo 1 — Introducción a la IA Avanzada y el Problema de los Límites</h2>
+      <p>Conceptos iniciales</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">1.1</span> ¿Qué es este tema y para qué sirve?</h3>
+    <p>Los modelos de inteligencia artificial de última generación —como <strong>GPT-6 Astra</strong>,
+      <strong>Claude Fabel 5.1</strong> o <strong>Imagen 2.5</strong>— son motores capaces de programar
+      videojuegos completos, construir tableros web interactivos y generar imágenes fotorrealistas en segundos.</p>
+    <p>Sin embargo, acceder a estos modelos PRO suele requerir suscripciones mensuales o está sujeto a
+      restricciones severas de uso por día. Este tutorial enseña una estrategia basada en
+      <strong>alias de correo electrónico</strong> para renovar sesiones de acceso y utilizar estos modelos
+      avanzados de forma completamente gratuita e ilimitada.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">1.2</span> ¿Por qué es importante aprenderlo?</h3>
+    <ul>
+      <li><strong>Elimina barreras económicas:</strong> Permite a estudiantes, creadores y desarrolladores
+        probar las herramientas de IA más potentes del mercado sin realizar pagos mensuales.</li>
+      <li><strong>Aumenta la productividad:</strong> Facilita la creación instantánea de prototipos web,
+        análisis de datos e imágenes profesionales.</li>
+      <li><strong>Fomenta la experimentación:</strong> Al no tener límites de consulta, puedes corregir,
+        iterar y mejorar tus proyectos tantas veces como necesites.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">1.3</span> Situaciones reales de uso</h3>
+    <ol>
+      <li><strong>Desarrollo Web y Frontend:</strong> Diseñar la interfaz y código funcional de una página
+        web en minutos sin saber programar desde cero.</li>
+      <li><strong>Creación de Videojuegos:</strong> Generar videojuegos interactivos completos en código
+        ejecutable.</li>
+      <li><strong>Dashboards Ejecutivos:</strong> Crear paneles de control interactivos con gráficos e
+        indicadores empresariales descargables.</li>
+      <li><strong>Diseño Gráfico y Publicidad:</strong> Generar imágenes artísticas manteniendo la
+        consistencia visual de un personaje en diferentes escenarios.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">1.4</span> Analogía para entender el concepto</h3>
+    <div class="callout info">
+      <span class="ci">💡</span>
+      <div>
+        <strong>La analogía del pase de prueba con casillero postal:</strong><br>
+        Imagina que un gimnasio de alta tecnología te regala un pase diario de prueba si registras tu
+        dirección postal. En lugar de cambiar de casa cada vez que quieres ir gratis, utilizas un casillero
+        postal con miles de apartados secundarios (los <strong>alias de correo</strong>). Todas las cartas
+        llegan a tu misma puerta, pero para el gimnasio cada entrada proviene de un registro distinto,
+        permitiéndote entrenar todos los días sin pagar la membresía.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">1.5</span> Glosario exprés de conceptos iniciales</h3>
+    <div class="grid2">
+      <div>
+        <h4>IA (Inteligencia Artificial)</h4>
+        <p>Programas diseñados para realizar tareas que normalmente requieren inteligencia humana, como
+          redactar, programar o diseñar.</p>
+        <h4>Modelo PRO</h4>
+        <p>Versión avanzada y restringida de una IA que ofrece mayor potencia pero requiere pago en
+          plataformas tradicionales.</p>
+        <h4>Frontend</h4>
+        <p>La parte visual e interactiva de una aplicación o sitio web con la que interactúa el usuario.</p>
+      </div>
+      <div>
+        <h4>HTML</h4>
+        <p>El lenguaje de marcado estándar que estructura las páginas web y permite ejecutarlas en
+          cualquier navegador.</p>
+        <h4>Alias de Correo</h4>
+        <p>Variaciones de una misma cuenta de correo electrónico que redirigen todos sus mensajes a una
+          única bandeja de entrada principal.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">1.6</span> Resumen del Capítulo 1</h3>
+    <div class="callout example">
+      <span class="ci">✅</span>
+      <div>Los modelos PRO de IA ofrecen capacidades extraordinarias, pero suelen estar bloqueados por muros
+        de pago o límites diarios. Mediante la estrategia de <strong>alias de correo</strong>, es posible
+        registrar accesos renovables para utilizar modelos como GPT-6 Astra e Imagen 2.5 sin restricciones
+        financieras.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- ============================ CAPÍTULO 2 ============================ -->
+<!-- ==================================================================== -->
+<section class="section" id="cap2">
+  <div class="sec-head">
+    <div class="sec-icon">🧰</div>
+    <div>
+      <h2>Capítulo 2 — Herramientas Necesarias y Flujo de Trabajo</h2>
+      <p>El sistema completo</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2.1</span> Las tres herramientas del sistema</h3>
+    <ol>
+      <li><strong>Mail Meteor:</strong> Plataforma encargada de transformar tu dirección de correo
+        electrónico principal en más de 2000 alias únicos.</li>
+      <li><strong>ChatGoat:</strong> Plataforma (frontend) que reúne y da acceso a múltiples modelos de IA
+        de nivel PRO (GPT-6 Astra, Claude Fabel 5.1, Imagen 2.5).</li>
+      <li><strong>Extensión VPN Gratuita:</strong> Herramienta para omitir bloqueos territoriales o
+        restricciones de conexión según tu país.</li>
+    </ol>
+    <div class="chips">
+      <span class="chip c">Mail Meteor</span>
+      <span class="chip g">ChatGoat</span>
+      <span class="chip a">VPN Gratuita</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2.2</span> Tabla comparativa de herramientas</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Herramienta</th><th>Función Principal</th><th>Costo</th><th>Rol en el Proceso</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Mail Meteor</strong></td>
+            <td>Generar listas de alias de correo</td>
+            <td>Gratuito</td>
+            <td>Proveer identidades de registro renovables</td>
+          </tr>
+          <tr>
+            <td><strong>ChatGoat</strong></td>
+            <td>Ejecutar los modelos de IA PRO</td>
+            <td>Gratuito mediante el truco</td>
+            <td>Procesar los prompts y entregar los resultados</td>
+          </tr>
+          <tr>
+            <td><strong>Extensión VPN</strong></td>
+            <td>Cambiar la ubicación de red</td>
+            <td>Gratuita</td>
+            <td>Desbloquear el acceso si hay restricciones regionales</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2.3</span> Lista de comprobación (Checklist) previa</h3>
+    <ul class="chk">
+      <li>Tener una cuenta de correo electrónico principal activa.</li>
+      <li>Disponer de un navegador web moderno (Chrome, Edge, Firefox o Brave).</li>
+      <li>Crear una carpeta en tu equipo llamada <code>Proyectos_IA</code> para guardar tus archivos.</li>
+      <li>Tener conexión estable a internet.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2.4</span> Esquema del flujo de trabajo</h3>
+    <div class="flow">
+      <span class="flow-node c">Tu Correo Principal</span>
+      <span class="flow-arrow">➔</span>
+      <span class="flow-node g">Mail Meteor<br>Genera 2048 Alias</span>
+      <span class="flow-arrow">➔</span>
+      <span class="flow-node a">Copias 1er Alias</span>
+      <span class="flow-arrow">➔</span>
+      <span class="flow-node p">Registras Alias<br>en ChatGoat</span>
+    </div>
+    <div class="flow">
+      <span class="flow-node p">Verificación<br>en Tu Inbox</span>
+      <span class="flow-arrow">➔</span>
+      <span class="flow-node g">Acceso Ilimitado</span>
+      <span class="flow-arrow">➔</span>
+      <span class="flow-node c">Usas GPT-6 Astra /<br>Imagen 2.5</span>
+      <span class="flow-arrow">➔</span>
+      <span class="flow-node r">¿Límite alcanzado?</span>
+      <span class="flow-arrow">➔</span>
+      <span class="flow-node a">Logout y usas<br>siguiente alias</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">AVISO</span> Uso responsable y términos de servicio</h3>
+    <div class="callout warn">
+      <span class="ci">⚠️</span>
+      <div>Crear muchos alias de correo para seguir usando un servicio cuando alcanzas su límite gratuito
+        <strong>puede infringir los términos de uso de esa plataforma</strong>. Si lo detectan, pueden limitar
+        el acceso, suspender las cuentas asociadas o dejar de enviarte los códigos de verificación.</div>
+    </div>
+    <ul>
+      <li>Lee los términos y condiciones de cada servicio antes de registrarte.</li>
+      <li>Recuerda que todos los alias entregan sus mensajes en tu correo principal: úsalo con esto en mente.</li>
+      <li>No subas datos personales, confidenciales ni de terceros a plataformas que no conozcas bien.</li>
+      <li>Si necesitas un uso intensivo o profesional, valora los planes oficiales gratuitos o de pago del servicio.</li>
+      <li>Este tutorial tiene fines educativos y de divulgación: cada persona es responsable de cómo lo aplica.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2.5</span> Resumen del Capítulo 2</h3>
+    <div class="callout example">
+      <span class="ci">✅</span>
+      <div>El sistema combina <strong>Mail Meteor</strong> para las credenciales y <strong>ChatGoat</strong>
+        para la ejecución de los modelos de IA, apoyándose en una <strong>VPN</strong> si existen filtros de
+        red geográficos.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- ============================ CAPÍTULO 3 ============================ -->
+<!-- ==================================================================== -->
+<section class="section" id="cap3">
+  <div class="sec-head">
+    <div class="sec-icon">✉️</div>
+    <div>
+      <h2>Capítulo 3 — Paso a Paso: Generación de Alias con Mail Meteor</h2>
+      <p>Procedimiento accionable</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3.1</span> Pasos numerados y accionables</h3>
+    <ol class="steps">
+      <li>
+        <b>Paso 1</b>
+        Abre tu navegador e ingresa al sitio oficial de <strong>Mail Meteor</strong>
+        (<a href="https://mailmeteor.com" target="_blank" rel="noopener">https://mailmeteor.com</a>).
+        <span class="why"><strong>Motivo de la acción:</strong> Acceder a la herramienta especializada en la
+          creación de alias.</span>
+      </li>
+      <li>
+        <b>Paso 2</b>
+        Escribe tu dirección de correo electrónico principal en la casilla de entrada.
+        <span class="why"><strong>Motivo de la acción:</strong> Indicar a la plataforma a qué buzón real
+          deben llegar los códigos de acceso.</span>
+      </li>
+      <li>
+        <b>Paso 3</b>
+        Haz clic en el botón para procesar y generar la lista de alias.
+        <span class="why"><strong>Motivo de la acción:</strong> La herramienta creará hasta 2048 variaciones
+          reconocidas de tu correo.</span>
+      </li>
+      <li>
+        <b>Paso 4</b>
+        Copia el <strong>primer alias</strong> que aparece en la lista generada.
+        <span class="why"><strong>Motivo de la acción:</strong> Este será el correo que utilizarás para tu
+          primera sesión en la plataforma de IA.</span>
+      </li>
+      <li>
+        <b>Paso 5</b>
+        Mantén la pestaña de Mail Meteor abierta o guarda la lista en un bloc de notas.
+        <span class="why"><strong>Motivo de la acción:</strong> Requerirás tomar los siguientes alias de
+          manera secuencial cada vez que renueves el acceso.</span>
+      </li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3.2</span> Errores frecuentes y cómo evitarlos</h3>
+    <div class="callout error">
+      <span class="ci">⛔</span>
+      <div><strong>Error:</strong> Colocar una dirección de correo falsa o inventada.<br>
+        <em>Cómo evitarlo:</em> Introduce siempre tu correo real; de lo contrario, jamás recibirás los
+        códigos de validación indispensables para entrar.</div>
+    </div>
+    <div class="callout warn">
+      <span class="ci">⚠️</span>
+      <div><strong>Error:</strong> Confundirse y pensar que hay que crear contraseñas para cada alias.<br>
+        <em>Cómo evitarlo:</em> Los alias no necesitan contraseña nueva; la autenticación se realiza
+        mediante un código temporal que llega a tu bandeja de entrada principal.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3.3</span> Ejemplos prácticos (Correcto vs. Incorrecto)</h3>
+    <div class="grid2">
+      <div class="callout example">
+        <span class="ci">✅</span>
+        <div>
+          <strong>Correcto:</strong> Tu correo es <code>juan@gmail.com</code>. Mail Meteor genera
+          <code>j.uan@gmail.com</code>. Copias este alias, lo usas para registrarte y el código llega
+          directamente a <code>juan@gmail.com</code>.
+        </div>
+      </div>
+      <div class="callout error">
+        <span class="ci">❌</span>
+        <div>
+          <strong>Incorrecto:</strong> Intentas inventar manualmente un correo como
+          <code>usuariofalso999@gmail.com</code>. Como no eres dueño de esa bandeja, el código se pierde y
+          no puedes entrar.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3.4</span> Resumen del Capítulo 3</h3>
+    <div class="callout example">
+      <span class="ci">✅</span>
+      <div>Mail Meteor permite obtener más de 2000 variaciones de correo vinculadas a tu cuenta principal
+        en segundos.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- ============================ CAPÍTULO 4 ============================ -->
+<!-- ==================================================================== -->
+<section class="section" id="cap4">
+  <div class="sec-head">
+    <div class="sec-icon">🔐</div>
+    <div>
+      <h2>Capítulo 4 — Paso a Paso: Autenticación Ilimitada en ChatGoat</h2>
+      <p>Registro, uso y ciclo de renovación</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">4.1</span> Pasos numerados y accionables</h3>
+    <ol class="steps">
+      <li>
+        <b>Paso 1</b>
+        Entra en la plataforma web de <strong>ChatGoat</strong>
+        (<a href="https://chatgoat.ai" target="_blank" rel="noopener">https://chatgoat.ai</a>).
+        <span class="why"><strong>Motivo de la acción:</strong> Ingresar al entorno que aloja los modelos de
+          IA avanzados.</span>
+      </li>
+      <li>
+        <b>Paso 2</b>
+        Haz clic en el botón de inicio de sesión ubicado en la parte superior.
+        <span class="why"><strong>Motivo de la acción:</strong> Abrir la ventana de autenticación.</span>
+      </li>
+      <li>
+        <b>Paso 3</b>
+        Selecciona la opción <strong>"Continuar con un email"</strong>.
+        <span class="why"><strong>Motivo de la acción:</strong> <strong>No elijas "Continuar con
+          Google"</strong>, ya que eso intentará iniciar sesión con tu cuenta fija sin usar la estrategia
+          de alias.</span>
+      </li>
+      <li>
+        <b>Paso 4</b>
+        Pega el alias que copiaste desde Mail Meteor y haz clic en <strong>"Enviar"</strong>.
+        <span class="why"><strong>Motivo de la acción:</strong> Solicitar el envío del PIN o código de
+          verificación.</span>
+      </li>
+      <li>
+        <b>Paso 5</b>
+        Abre la bandeja de entrada de tu correo principal, copia el código numérico recibido y pégalo en
+        ChatGoat.
+        <span class="why"><strong>Motivo de la acción:</strong> Confirmar la validez del correo y activar la
+          cuenta.</span>
+      </li>
+      <li>
+        <b>Paso 6</b>
+        Haz clic en el botón <strong>"Sure"</strong> (o Confirmar).
+        <span class="why"><strong>Motivo de la acción:</strong> Completar el ingreso y acceder al panel de
+          chats.</span>
+      </li>
+      <li>
+        <b>Paso 7</b>
+        Abre el menú desplegable de modelos y selecciona un modelo de la categoría <strong>PRO</strong>
+        (ejemplo: <strong>GPT-6 Astra</strong>, <strong>Claude Fabel 5.1</strong> o
+        <strong>Imagen 2.5</strong>).
+        <span class="why"><strong>Motivo de la acción:</strong> Habilitar el motor de IA más potente para tu
+          consulta.</span>
+      </li>
+      <li>
+        <b>Paso 8 (El ciclo de renovación)</b>
+        Al recibir la ventana emergente de límite de consultas alcanzado, haz clic en la opción
+        <strong>"Logout"</strong> (Cerrar sesión).
+        <span class="why"><strong>Motivo de la acción:</strong> Desvincular la cuenta agotada para preparar
+          la plataforma.</span>
+      </li>
+      <li>
+        <b>Paso 9</b>
+        Copia el <strong>siguiente alias</strong> de tu lista de Mail Meteor y repite los pasos del 2 al 6.
+        <span class="why"><strong>Motivo de la acción:</strong> Reiniciar las métricas de uso y continuar
+          trabajando gratis e ilimitadamente.</span>
+      </li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">4.2</span> Solución a bloqueos territoriales (Uso de VPN)</h3>
+    <p>Si la plataforma no carga o muestra restricciones por tu país de origen:</p>
+    <ol class="steps">
+      <li><b>Paso 1</b> Instala una extensión de <strong>VPN gratuita</strong> en tu navegador.</li>
+      <li><b>Paso 2</b> Haz clic en la extensión y conéctate a un servidor en un país sin restricciones
+        (por ejemplo, Estados Unidos o España).</li>
+      <li><b>Paso 3</b> Recarga ChatGoat y realiza el proceso de inicio de sesión normalmente.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">4.3</span> Resumen del Capítulo 4</h3>
+    <div class="callout example">
+      <span class="ci">✅</span>
+      <div>Al registrarte con la opción "Continuar con un email" usando un alias y cerrar sesión
+        ("Logout") al alcanzar la restricción, mantienes un acceso ininterrumpido a los modelos PRO.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- ============================ CAPÍTULO 5 ============================ -->
+<!-- ==================================================================== -->
+<section class="section" id="cap5">
+  <div class="sec-head">
+    <div class="sec-icon">💻</div>
+    <div>
+      <h2>Capítulo 5 — Casos Prácticos de Programación y Desarrollo Web con GPT-6 Astra</h2>
+      <p>Del prompt al archivo .html</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">5.1</span> Guía para guardar y visualizar archivos HTML</h3>
+    <p>Para que el código que entrega la IA se transforme en una aplicación web interactiva en tu
+      computadora:</p>
+    <ol class="steps">
+      <li><b>Paso 1</b> Abre tu carpeta <code>Proyectos_IA</code>.</li>
+      <li><b>Paso 2</b> Haz clic derecho ➔ <code>Nuevo</code> ➔ <code>Documento de texto</code>.</li>
+      <li><b>Paso 3</b> Abre el archivo de texto y pega todo el código generado por la IA.</li>
+      <li><b>Paso 4</b> Ve al menú <code>Archivo</code> ➔ <code>Guardar como...</code>.</li>
+      <li><b>Paso 5</b> En el campo de nombre, asigna una denominación que termine obligatoriamente en
+        <strong><code>.html</code></strong> (ejemplo: <code>juego.html</code> o
+        <code>dashboard.html</code>).</li>
+      <li><b>Paso 6</b> Haz doble clic sobre el archivo <code>.html</code> creado para abrirlo y
+        jugarlo/visualizarlo en tu navegador web.</li>
+    </ol>
+    <div class="callout warn">
+      <span class="ci">⚠️</span>
+      <div>Si guardas el archivo como <code>.txt</code>, el navegador mostrará el código como texto plano
+        en lugar de ejecutar la aplicación.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">5.2</span> Caso Práctico 1: Videojuego en HTML (Tipo Mario Kart)</h3>
+    <ul>
+      <li><strong>Objetivo:</strong> Crear un juego interactivo ejecutable localmente.</li>
+      <li><strong>Modelo seleccionado:</strong> GPT-6 Astra.</li>
+    </ul>
+    <div class="prompt-box" data-pid="1">"quiero que me crees el código en HTML de un juego tipo <span class="pv" data-default="Mario Kart" data-label="Tipo de juego">Mario Kart</span> en alta calidad y con unos personajes en alta calidad también"</div>
+    <p><strong>Resultado:</strong> La IA genera la estructura de código en HTML. Al guardarlo como
+      <code>game.html</code> y ejecutarlo, se abre un videojuego con pista y personajes navegables.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">5.3</span> Caso Práctico 2: Animación 3D desde un Boceto en Imagen</h3>
+    <ul>
+      <li><strong>Objetivo:</strong> Convertir una imagen o plano en una animación 3D interactiva.</li>
+      <li><strong>Modelo seleccionado:</strong> GPT-6 Astra.</li>
+      <li><strong>Acción previa:</strong> Haz clic en el botón <code>+</code> dentro de ChatGoat y adjunta
+        la imagen del boceto (ejemplo: el dibujo de una casa).</li>
+    </ul>
+    <div class="prompt-box" data-pid="2">"quiero que a partir de este boceto me hagas una animación es decir quiero que me crees el código para una animación en HTML de este boceto es decir de <span class="pv" data-default="esta casa" data-label="Qué representa el boceto">esta casa</span>"</div>
+    <p><strong>Resultado:</strong> Un código que guardas como <code>3D.html</code>. Al abrirlo, muestra la
+      edificación en 3D con controles para rotación de 360°, vistas frontal, lateral, superior y botones
+      para ocultar o mostrar el suelo.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">5.4</span> Caso Práctico 3: Dashboard Ejecutivo Profesional e Interactivo</h3>
+    <ul>
+      <li><strong>Objetivo:</strong> Investigar un tema y presentarlo en un tablero de control empresarial.</li>
+      <li><strong>Modelo seleccionado:</strong> GPT-6 Astra.</li>
+    </ul>
+    <div class="prompt-box" data-pid="3">"necesito que me hagas una investigación de cómo está <span class="pv" data-default="la inteligencia artificial" data-label="Tema de la investigación">la inteligencia artificial</span> a día de hoy quiero que me hagas un informe ejecutivo impecable y de ese informe ejecutivo quiero que me crees un HTML es decir un dashboard con todo tipo de información y que sea muy clara"</div>
+    <p><strong>Resultado:</strong> Un código extenso que al guardarse como <code>.html</code> genera un
+      Dashboard profesional con pestañas de indicadores, tecnología de mercado, simuladores de riesgo,
+      plan de acción y opciones para descargar datos o imprimir en PDF.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">5.5</span> Resumen del Capítulo 5</h3>
+    <div class="callout example">
+      <span class="ci">✅</span>
+      <div>GPT-6 Astra puede programar juegos, animaciones 3D e informes interactivos. La clave para
+        ejecutarlos es guardar el código entregado con la extensión <code>.html</code>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- ============================ CAPÍTULO 6 ============================ -->
+<!-- ==================================================================== -->
+<section class="section" id="cap6">
+  <div class="sec-head">
+    <div class="sec-icon">🎨</div>
+    <div>
+      <h2>Capítulo 6 — Generación Ilimitada de Imágenes con Imagen 2.5</h2>
+      <p>Consistencia de personaje y escenarios</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">6.1</span> Configuración de la herramienta de imagen</h3>
+    <ol class="steps">
+      <li><b>Paso 1</b> En ChatGoat, entra a la pestaña <strong>IA Imagen</strong>.</li>
+      <li><b>Paso 2</b> Si la interfaz está en inglés, selecciona <strong>Español</strong> en la barra de
+        idioma.</li>
+      <li><b>Paso 3</b> En la lista de modelos, selecciona <strong>Imagen 2.5 Sunburn</strong> (o boun).</li>
+      <li><b>Paso 4</b> Configura el formato en <code>16:9</code> y el estilo en <code>Artístico</code>.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">6.2</span> Caso Práctico 1: Cambio de fondo manteniendo consistencia de personaje</h3>
+    <ul>
+      <li><strong>Objetivo:</strong> Ubicar a una persona en un entorno nuevo preservando sus rasgos
+        faciales.</li>
+      <li><strong>Acción previa:</strong> Adjunta tu imagen de referencia.</li>
+    </ul>
+    <div class="prompt-box" data-pid="4">"te dejo esta imagen de este personaje y quiero que me cambies el fondo completamente es decir quiero que esté en <span class="pv" data-default="Marte" data-label="Nuevo fondo">Marte</span> y manteniendo la misma consistencia quiero que hagas una creación brutal"</div>
+    <p><strong>Resultado:</strong> Una imagen de alta definición del personaje con traje espacial en un
+      paisaje marciano.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">6.3</span> Caso Práctico 2: Modificación de escenario (Estrategia ante límites)</h3>
+    <div class="callout warn">
+      <span class="ci">⚠️</span>
+      <div><strong>Situación:</strong> Al pedir una segunda modificación, la plataforma solicita pago.</div>
+    </div>
+    <p><strong>Procedimiento sin costo:</strong></p>
+    <ol class="steps">
+      <li><b>Paso 1</b> Descarga la imagen generada en el paso anterior a tu computadora.</li>
+      <li><b>Paso 2</b> Haz clic en <strong>Logout</strong> en ChatGoat.</li>
+      <li><b>Paso 3</b> Copia el siguiente alias de Mail Meteor e inicia sesión con un nuevo código.</li>
+      <li><b>Paso 4</b> Ve a <strong>IA Imagen</strong>, selecciona <strong>Imagen 2.5 Sunburn</strong>,
+        vuelve a subir la imagen recién descargada y coloca el nuevo prompt.</li>
+    </ol>
+    <div class="prompt-box" data-pid="5">"quiero que mantengas la consistencia del personaje pero quiero que cambies el fondo por completo y resulte de que esté en <span class="pv" data-default="la playa" data-label="Nuevo fondo">la playa</span> en una calidad brutal sobre todo vigila las sombras y las luces"</div>
+    <p><strong>Resultado:</strong> Una imagen del personaje en la playa con ajuste óptimo de luces y
+      sombras sin realizar ningún pago.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">6.4</span> Resumen del Capítulo 6</h3>
+    <div class="callout example">
+      <span class="ci">✅</span>
+      <div>Para generar imágenes ilimitadas manteniendo personajes, descarga el resultado, cierra sesión y
+        vuelve a entrar con un nuevo alias para continuar la edición.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- ============================ CAPÍTULO 7 ============================ -->
+<!-- ==================================================================== -->
+<section class="section" id="cap7">
+  <div class="sec-head">
+    <div class="sec-icon">📘</div>
+    <div>
+      <h2>Capítulo 7 — Síntesis, Ejercicios, Errores Prohibidos y Glosario</h2>
+      <p>Consolidación del aprendizaje</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">7.1</span> Resumen global de lo aprendido</h3>
+    <p>Aprendiste a generar miles de alias de correo con <strong>Mail Meteor</strong> para registrarte
+      repetidamente en <strong>ChatGoat</strong> mediante la opción "Continuar con un email". Esto permite
+      usar gratis y sin límites <strong>GPT-6 Astra</strong> (para crear código web, juegos y dashboards) e
+      <strong>Imagen 2.5</strong> (para generar y editar imágenes con alta consistencia).</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">7.2</span> Lista de conceptos clave</h3>
+    <ul>
+      <li><strong>Alias de Correo:</strong> Direcciones secundarias vinculadas a una bandeja principal.</li>
+      <li><strong>ChatGoat:</strong> Plataforma multi-modelo con acceso a Inteligencias Artificiales de
+        categoría PRO.</li>
+      <li><strong>GPT-6 Astra:</strong> Modelo avanzado para la generación de texto estructurado y código
+        ejecutable.</li>
+      <li><strong>Imagen 2.5 Sunburn:</strong> Modelo de generación visual enfocado en detalle y
+        consistencia.</li>
+      <li><strong>Extensión <code>.html</code>:</strong> Formato de archivo que permite ejecutar
+        aplicaciones web en el navegador local.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">7.3</span> 10 Errores que NUNCA debes cometer</h3>
+    <ol>
+      <li>Seleccionar "Continuar con Google" en lugar de "Continuar con un email".</li>
+      <li>Guardar el código entregado por la IA como <code>.txt</code> en lugar de <code>.html</code>.</li>
+      <li>Escribir una dirección de correo inventada a la cual no tengas acceso real.</li>
+      <li>Pagar por una suscripción cuando aparezca el aviso de límite en lugar de hacer "Logout".</li>
+      <li>No descargar la imagen generada antes de cerrar sesión si deseas mantener la consistencia en la
+        siguiente consulta.</li>
+      <li>Intentar ejecutar código web haciendo doble clic en un documento de texto simple sin extensión
+        <code>.html</code>.</li>
+      <li>Cerrar la pestaña de Mail Meteor sin llevar el control de qué alias ya utilizaste.</li>
+      <li>Olvidar revisar la carpeta de Spam o Promociones si el código de verificación no aparece de
+        inmediato.</li>
+      <li>Dar instrucciones breves o incompletas para la creación de código complejo.</li>
+      <li>Intentar acceder desde regiones restringidas sin activar la extensión VPN.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">7.4</span> Recomendaciones para seguir aprendiendo</h3>
+    <ul>
+      <li>Pide a GPT-6 Astra que agregue nuevas funciones a tus archivos <code>.html</code> (por ejemplo:
+        agregar puntuación a los juegos o cambiar la paleta de colores del Dashboard).</li>
+      <li>Explora otros modelos presentes en la lista PRO de ChatGoat, como <strong>Claude Fabel 5.1</strong>
+        o <strong>DeepSeek</strong>, para comparar sus respuestas en redacción y lógica.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">7.5</span> Ejercicios prácticos con soluciones explicadas</h3>
+
+    <div class="acc">
+      <button class="acc-head" type="button">
+        <span>Ejercicio 1 — Registro e inicio de sesión con alias</span>
+        <span class="arw">▼</span>
+      </button>
+      <div class="acc-body"><div class="acc-inner">
+        <p><strong>Tarea:</strong> Genera un alias en Mail Meteor e inicia sesión en ChatGoat.</p>
+        <p><strong>Solución explicada:</strong> Ingresa a Mail Meteor, escribe tu correo y copia el primer
+          alias. Ve a ChatGoat, selecciona "Continuar con un email", pega el alias y revisa tu bandeja
+          principal para copiar el código de números recibido.</p>
+      </div></div>
+    </div>
+
+    <div class="acc">
+      <button class="acc-head" type="button">
+        <span>Ejercicio 2 — Creación de una herramienta web simple</span>
+        <span class="arw">▼</span>
+      </button>
+      <div class="acc-body"><div class="acc-inner">
+        <p><strong>Tarea:</strong> Genera una calculadora funcional en HTML con GPT-6 Astra.</p>
+        <p><strong>Solución explicada:</strong> Selecciona GPT-6 Astra en ChatGoat y escribe:
+          <em>"Crea el código en HTML de una calculadora científica interactiva"</em>. Copia el resultado,
+          guárdalo como <code>calculadora.html</code> dentro de tu carpeta <code>Proyectos_IA</code> y haz
+          doble clic para usarla en tu navegador.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">7.6</span> Glosario completo de términos técnicos</h3>
+    <div class="grid2">
+      <div>
+        <h4>Alias de Correo</h4>
+        <p>Dirección alternativa que reenvía todos sus correos a una bandeja principal.</p>
+        <h4>Dashboard</h4>
+        <p>Panel interactivo que resume datos e indicadores mediante gráficos.</p>
+        <h4>Frontend</h4>
+        <p>La interfaz gráfica visual con la que interactúa el usuario en una web o app.</p>
+        <h4>HTML</h4>
+        <p>Lenguaje estándar utilizado para estructurar y desplegar páginas en la web.</p>
+      </div>
+      <div>
+        <h4>Logout</h4>
+        <p>Acción de cerrar la sesión de usuario en un servicio o sitio web.</p>
+        <h4>Prompt</h4>
+        <p>La instrucción u orden escrita que se le da a un modelo de IA.</p>
+        <h4>VPN</h4>
+        <p>Red privada virtual que permite modificar la ubicación geográfica aparente de tu conexión.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">7.7</span> Preguntas Frecuentes (FAQ)</h3>
+
+    <div class="acc">
+      <button class="acc-head" type="button">
+        <span>¿Es gratuito utilizar este método?</span>
+        <span class="arw">▼</span>
+      </button>
+      <div class="acc-body"><div class="acc-inner">
+        <p>Sí, tanto la generación de alias como la autenticación mediante correo son procesos
+          completamente gratuitos.</p>
+      </div></div>
+    </div>
+
+    <div class="acc">
+      <button class="acc-head" type="button">
+        <span>¿Por qué mi navegador muestra texto en lugar del juego o dashboard?</span>
+        <span class="arw">▼</span>
+      </button>
+      <div class="acc-body"><div class="acc-inner">
+        <p>Esto ocurre si guardaste el archivo como <code>.txt</code>. Debes seleccionar "Guardar como" y
+          asegurarte de que el nombre termine en <code>.html</code>.</p>
+      </div></div>
+    </div>
+
+    <div class="acc">
+      <button class="acc-head" type="button">
+        <span>¿Cuántos alias puedo utilizar?</span>
+        <span class="arw">▼</span>
+      </button>
+      <div class="acc-body"><div class="acc-inner">
+        <p>Mail Meteor permite generar hasta 2048 alias por cada cuenta de correo principal que
+          ingreses.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- ============================ CAPÍTULO 8 ============================ -->
+<!-- ==================================================================== -->
+<section class="section" id="cap8">
+  <div class="sec-head">
+    <div class="sec-icon">📋</div>
+    <div>
+      <h2>Capítulo 8 — Recopilatorio de Prompts, Video de YouTube y Fuentes</h2>
+      <p>Material de referencia</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">8.1</span> Prompts oficiales del tutorial</h3>
+    <div class="copyall-row"><button type="button" class="copyall-btn" id="copyAll">Copiar los 5 prompts</button><span>Copia todos con su título (incluye tus personalizaciones).</span></div>
+
+    <h4>1. Prompt para Videojuego HTML (Tipo Mario Kart)</h4>
+    <p class="origin-link-row"><a href="#" class="origin-link" data-goto="cap5" data-focus="1">↗ Ver este prompt en el Capítulo 5</a></p>
+    <div class="prompt-box" data-pid="1">"quiero que me crees el código en HTML de un juego tipo <span class="pv" data-default="Mario Kart" data-label="Tipo de juego">Mario Kart</span> en alta calidad y con unos personajes en alta calidad también"</div>
+
+    <h4>2. Prompt para Animación 3D desde Boceto</h4>
+    <p class="origin-link-row"><a href="#" class="origin-link" data-goto="cap5" data-focus="2">↗ Ver este prompt en el Capítulo 5</a></p>
+    <div class="prompt-box" data-pid="2">"quiero que a partir de este boceto me hagas una animación es decir quiero que me crees el código para una animación en HTML de este boceto es decir de <span class="pv" data-default="esta casa" data-label="Qué representa el boceto">esta casa</span>"</div>
+
+    <h4>3. Prompt para Informe Ejecutivo y Dashboard de IA</h4>
+    <p class="origin-link-row"><a href="#" class="origin-link" data-goto="cap5" data-focus="3">↗ Ver este prompt en el Capítulo 5</a></p>
+    <div class="prompt-box" data-pid="3">"necesito que me hagas una investigación de cómo está <span class="pv" data-default="la inteligencia artificial" data-label="Tema de la investigación">la inteligencia artificial</span> a día de hoy quiero que me hagas un informe ejecutivo impecable y de ese informe ejecutivo quiero que me crees un HTML es decir un dashboard con todo tipo de información y que sea muy clara"</div>
+
+    <h4>4. Prompt para Generación de Imagen en Marte (Imagen 2.5)</h4>
+    <p class="origin-link-row"><a href="#" class="origin-link" data-goto="cap6" data-focus="4">↗ Ver este prompt en el Capítulo 6</a></p>
+    <div class="prompt-box" data-pid="4">"te dejo esta imagen de este personaje y quiero que me cambies el fondo completamente es decir quiero que esté en <span class="pv" data-default="Marte" data-label="Nuevo fondo">Marte</span> y manteniendo la misma consistencia quiero que hagas una creación brutal"</div>
+
+    <h4>5. Prompt para Modificación de Imagen a la Playa (Imagen 2.5)</h4>
+    <p class="origin-link-row"><a href="#" class="origin-link" data-goto="cap6" data-focus="5">↗ Ver este prompt en el Capítulo 6</a></p>
+    <div class="prompt-box" data-pid="5">"quiero que mantengas la consistencia del personaje pero quiero que cambies el fondo por completo y resulte de que esté en <span class="pv" data-default="la playa" data-label="Nuevo fondo">la playa</span> en una calidad brutal sobre todo vigila las sombras y las luces"</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">8.2</span> Información del Video de YouTube</h3>
+    <ul>
+      <li><strong>Nombre del video:</strong> <code>Cómo usar GPT‑6 Astra + GPT Image 2.5 GRATIS e ILIMITADO 🤯</code></li>
+      <li><strong>Canal de YouTube:</strong> NextGen IA Hub</li>
+      <li><strong>Enlace URL directo:</strong>
+        <a href="https://youtube.com/watch?v=-oTwFJbTEbk&amp;is=zcgJ7MizYd6AsnaY" target="_blank" rel="noopener">https://youtube.com/watch?v=-oTwFJbTEbk&amp;is=zcgJ7MizYd6AsnaY</a></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">8.3</span> FUENTES y Enlaces Oficiales</h3>
+
+    <h4>1. Video Tutorial de Referencia en YouTube</h4>
+    <ul>
+      <li><strong>Título:</strong> "Cómo usar GPT‑6 Astra + GPT Image 2.5 GRATIS e ILIMITADO 🤯"</li>
+      <li><strong>URL:</strong> <a href="https://youtube.com/watch?v=-oTwFJbTEbk&amp;is=zcgJ7MizYd6AsnaY" target="_blank" rel="noopener">https://youtube.com/watch?v=-oTwFJbTEbk&amp;is=zcgJ7MizYd6AsnaY</a></li>
+    </ul>
+
+    <h4>2. Generador de Alias de Correo Electrónico</h4>
+    <ul>
+      <li><strong>Nombre:</strong> Mail Meteor</li>
+      <li><strong>URL:</strong> <a href="https://mailmeteor.com" target="_blank" rel="noopener">https://mailmeteor.com</a></li>
+    </ul>
+
+    <h4>3. Plataforma de Modelos de Inteligencia Artificial</h4>
+    <ul>
+      <li><strong>Nombre:</strong> ChatGoat</li>
+      <li><strong>URL:</strong> <a href="https://chatgoat.ai" target="_blank" rel="noopener">https://chatgoat.ai</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- ============================== FUENTES ============================= -->
+<!-- ==================================================================== -->
+<section class="section" id="fuentes">
+  <div class="sec-head">
+    <div class="sec-icon">🔗</div>
+    <div>
+      <h2>FUENTES</h2>
+      <p>Enlaces oficiales del tutorial</p>
+    </div>
+  </div>
+
+  <div class="src-card">
+    <div class="src-ico">🎬</div>
+    <div>
+      <div class="lbl">Video Tutorial de Referencia en YouTube</div>
+      <h4>Cómo usar GPT‑6 Astra + GPT Image 2.5 GRATIS e ILIMITADO 🤯</h4>
+      <p style="font-size:.85rem;color:var(--txt-dim);margin:6px 0">Canal: NextGen IA Hub</p>
+      <a href="https://youtube.com/watch?v=-oTwFJbTEbk&amp;is=zcgJ7MizYd6AsnaY" target="_blank" rel="noopener">https://youtube.com/watch?v=-oTwFJbTEbk&amp;is=zcgJ7MizYd6AsnaY</a>
+    </div>
+  </div>
+
+  <div class="src-card">
+    <div class="src-ico">✉️</div>
+    <div>
+      <div class="lbl">Generador de Alias de Correo Electrónico</div>
+      <h4>Mail Meteor</h4>
+      <a href="https://mailmeteor.com" target="_blank" rel="noopener">https://mailmeteor.com</a>
+    </div>
+  </div>
+
+  <div class="src-card">
+    <div class="src-ico">🤖</div>
+    <div>
+      <div class="lbl">Plataforma de Modelos de Inteligencia Artificial</div>
+      <h4>ChatGoat</h4>
+      <a href="https://chatgoat.ai" target="_blank" rel="noopener">https://chatgoat.ai</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- ============================= CRÉDITOS ============================= -->
+<!-- ==================================================================== -->
+<section class="section" id="creditos">
+
+  <!-- MISMO SVG ANIMADO QUE EN HOME (clonado por JS) -->
+  <div class="svg-holder" id="creditsSvgHolder" style="border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:22px"></div>
+
+  <div class="sec-head">
+    <div class="sec-icon">🏅</div>
+    <div>
+      <h2>CRÉDITOS</h2>
+      <p>Información de autoría y edición</p>
+    </div>
+  </div>
+
+  <div class="credits-wrap">
+    <div class="credit-item">
+      <div class="k">Título del Tutorial</div>
+      <div class="v cy">Uso Ilimitado y Gratuito de Modelos Avanzados de IA</div>
+    </div>
+    <div class="credit-item">
+      <div class="k">Créditos</div>
+      <div class="v pu">Rubén Sbarsky</div>
+    </div>
+    <div class="credit-item">
+      <div class="k">Fecha</div>
+      <div class="v">29/09/2026</div>
+    </div>
+    <div class="credit-item">
+      <div class="k">Hora</div>
+      <div class="v">05:56:16</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <h3><span class="num">EDU</span> Indicación educativa</h3>
+    <p>Este tutorial ha sido elaborado exclusivamente con fines <strong>educativos y de
+      divulgación</strong>. Su objetivo es explicar conceptos técnicos y estrategias de uso de
+      herramientas digitales de manera comprensible y accesible para cualquier estudiante.</p>
+  </div>
+
+  <div class="fiat">Fiat iustitia, ruat caelum.</div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <p>📚 Tutorial solo con fines Educativos y Divulgación</p>
+  <p>👨‍💻 Créditos: Rubén Sbarsky</p>
+  <p>📅 FECHA: 29/09/2026</p>
+  <p>Hora: 05:56:16</p>
+  <p class="f-fiat">Fiat iustitia, ruat caelum.</p>
+</footer>
+
+<!-- ============ BACK TO TOP ============ -->
+<button id="toTop" aria-label="Volver arriba">↑</button>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============ SPA NAVIGATION ============ */
+  var navBtns   = Array.prototype.slice.call(document.querySelectorAll('.nav-btn'));
+  var sections  = Array.prototype.slice.call(document.querySelectorAll('.section'));
+  var progress  = document.getElementById('progressBar');
+  var toTop     = document.getElementById('toTop');
+  var creditsHolder = document.getElementById('creditsSvgHolder');
+  var homeSvgHolder = document.getElementById('homeSvgHolder');
+  var creditsFilled = false;
+
+  function showSection(id){
+    var found = false;
+    sections.forEach(function(s){
+      if(s.id === id){ s.classList.add('active'); found = true; }
+      else{ s.classList.remove('active'); }
+    });
+    if(!found){ document.getElementById('inicio').classList.add('active'); id = 'inicio'; }
+
+    navBtns.forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-target') === id);
+    });
+
+    /* Clonar SVG animado en CRÉDITOS (mismo SVG, reiniciado) */
+    if(id === 'creditos'){
+      fillCreditsSvg(true);
+    }
+
+    window.scrollTo({top:0, behavior:'smooth'});
+    updateProgress();
+  }
+
+  function fillCreditsSvg(force){
+    if(!homeSvgHolder) return;
+    var original = homeSvgHolder.querySelector('svg');
+    if(!original) return;
+    if(creditsFilled && !force) return;
+
+    creditsHolder.innerHTML = '';
+    var clone = original.cloneNode(true);
+    clone.removeAttribute('id');
+    /* Asegurar IDs únicos no es necesario: el clon usa los mismos defs internos,
+       y como se recrea en cada visita, las animaciones se reinician solas. */
+    creditsHolder.appendChild(clone);
+    creditsFilled = true;
+
+    /* Reiniciar animaciones SMIL del clon */
+    try{
+      var svgEl = creditsHolder.querySelector('svg');
+      if(svgEl && typeof svgEl.setCurrentTime === 'function'){
+        svgEl.setCurrentTime(0);
+      }
+      if(svgEl && typeof svgEl.unpauseAnimations === 'function'){
+        svgEl.unpauseAnimations();
+      }
+    }catch(e){}
+  }
+
+  navBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      showSection(this.getAttribute('data-target'));
+    });
+  });
+
+  /* Enlaces internos del índice */
+  document.querySelectorAll('[data-goto]').forEach(function(a){
+    a.addEventListener('click', function(ev){
+      ev.preventDefault();
+      showSection(this.getAttribute('data-goto'));
+    });
+  });
+
+  /* ============ PROGRESS BAR ============ */
+  function updateProgress(){
+    var h = document.documentElement;
+    var scrollTop = window.pageYOffset || h.scrollTop || document.body.scrollTop || 0;
+    var scrollHeight = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
+    var pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    pct = Math.max(0, Math.min(100, pct));
+    progress.style.width = pct + '%';
+
+    if(scrollTop > 320){ toTop.classList.add('show'); }
+    else{ toTop.classList.remove('show'); }
+  }
+
+  window.addEventListener('scroll', updateProgress, {passive:true});
+  window.addEventListener('resize', updateProgress);
+
+  /* ============ BACK TO TOP ============ */
+  toTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  /* ============ ACCORDIONS ============ */
+  document.querySelectorAll('.acc-head').forEach(function(head){
+    head.addEventListener('click', function(){
+      var acc = this.parentElement;
+      acc.classList.toggle('open');
+    });
+  });
+
+  /* ============ MEJORAS v2 ============ */
+  var root = document.documentElement;
+
+  /* --- utilidades: almacenamiento, aviso, portapapeles --- */
+  var store = {
+    get: function(k){ try{ return window.localStorage.getItem(k); }catch(e){ return null; } },
+    set: function(k,v){ try{ window.localStorage.setItem(k,v); }catch(e){} }
+  };
+  function loadJSON(k){
+    try{ var o = JSON.parse(store.get(k) || '{}'); return (o && typeof o === 'object') ? o : {}; }
+    catch(e){ return {}; }
+  }
+
+  var toastEl = document.createElement('div');
+  toastEl.id = 'toast';
+  toastEl.setAttribute('role','status');
+  toastEl.setAttribute('aria-live','polite');
+  document.body.appendChild(toastEl);
+  var toastT;
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastT);
+    toastT = setTimeout(function(){ toastEl.classList.remove('show'); }, 1700);
+  }
+
+  function copyText(text, cb){
+    function legacy(){
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly','');
+      ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try{ ok = document.execCommand('copy'); }catch(e){}
+      document.body.removeChild(ta);
+      cb(ok);
+    }
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(text).then(function(){ cb(true); }, legacy);
+    }else{
+      legacy();
+    }
+  }
+
+  function makeCopyBtn(getText, label){
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'copy-btn';
+    btn.textContent = 'Copy';
+    btn.setAttribute('aria-label', label || 'Copiar al portapapeles');
+    var t;
+    function flash(cls, txt){
+      btn.classList.remove('copied','failed');
+      btn.classList.add(cls);
+      btn.textContent = txt;
+      clearTimeout(t);
+      t = setTimeout(function(){
+        btn.classList.remove('copied','failed');
+        btn.textContent = 'Copy';
+      }, 1800);
+    }
+    btn.addEventListener('click', function(){
+      copyText(getText(), function(ok){ flash(ok ? 'copied' : 'failed', ok ? '¡Copiado!' : 'Error'); });
+    });
+    return btn;
+  }
+
+  function flashEl(el){
+    el.classList.remove('flash');
+    void el.offsetWidth;
+    el.classList.add('flash');
+    setTimeout(function(){ el.classList.remove('flash'); }, 1800);
+  }
+
+  /* --- Copy en cada prompt (botón sobre el borde, no tapa el texto) --- */
+  function promptText(box){
+    var c = box.cloneNode(true);
+    var b = c.querySelector('.copy-btn');
+    if(b) b.parentNode.removeChild(b);
+    return c.textContent.replace(/\s+/g,' ').trim().replace(/^["“«]+|["”»]+$/g,'').trim();
+  }
+  document.querySelectorAll('.prompt-box').forEach(function(box){
+    box.appendChild(makeCopyBtn(function(){ return promptText(box); }, 'Copiar prompt al portapapeles'));
+  });
+
+  /* --- Copy en bloques <pre> (si los hubiera) --- */
+  document.querySelectorAll('pre').forEach(function(pre){
+    if(pre.parentNode.classList && pre.parentNode.classList.contains('code-wrap')) return;
+    var w = document.createElement('div');
+    w.className = 'code-wrap';
+    pre.parentNode.insertBefore(w, pre);
+    w.appendChild(pre);
+    w.appendChild(makeCopyBtn(function(){ return pre.textContent; }, 'Copiar código al portapapeles'));
+  });
+
+  /* --- Clic para copiar nombres de archivo, extensiones y carpetas --- */
+  var CODE_RE = /^(\.[a-z0-9]{2,5}|[A-Za-z0-9_\-]+\.[a-z0-9]{2,5}|[A-Za-z0-9]+_[A-Za-z0-9_]+)$/;
+  document.querySelectorAll('code').forEach(function(c){
+    if(c.closest('pre')) return;
+    var t = c.textContent.trim();
+    if(!CODE_RE.test(t)) return;
+    c.classList.add('cpy');
+    c.setAttribute('tabindex','0');
+    c.setAttribute('role','button');
+    c.title = 'Clic para copiar';
+    function go(){ copyText(t, function(ok){ toast(ok ? 'Copiado: ' + t : 'No se pudo copiar'); }); }
+    c.addEventListener('click', go);
+    c.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(); }
+    });
+  });
+
+  /* --- Prompts personalizables (valor compartido entre capítulo y recopilatorio) --- */
+  var pvStore = loadJSON('iaTut:pv');
+  function applyPV(pid, val, src){
+    var v = (val || '').replace(/\s+/g,' ').trim();
+    document.querySelectorAll('.prompt-box[data-pid="' + pid + '"] .pv').forEach(function(sp){
+      sp.textContent = v || sp.getAttribute('data-default');
+    });
+    document.querySelectorAll('.pv-row[data-pid="' + pid + '"] input').forEach(function(inp){
+      if(inp !== src) inp.value = v;
+    });
+    if(v){ pvStore[pid] = v; } else { delete pvStore[pid]; }
+    store.set('iaTut:pv', JSON.stringify(pvStore));
+  }
+  document.querySelectorAll('.prompt-box[data-pid]').forEach(function(box){
+    var pid = box.getAttribute('data-pid');
+    var sp = box.querySelector('.pv');
+    if(!sp) return;
+    var row = document.createElement('div');
+    row.className = 'pv-row';
+    row.setAttribute('data-pid', pid);
+    var lab = document.createElement('label');
+    lab.appendChild(document.createTextNode('✏️ Personalizar: '));
+    var em = document.createElement('em');
+    em.textContent = sp.getAttribute('data-label') || 'Tema';
+    lab.appendChild(em);
+    var inp = document.createElement('input');
+    inp.type = 'text';
+    inp.maxLength = 80;
+    inp.autocomplete = 'off';
+    inp.placeholder = sp.getAttribute('data-default');
+    inp.setAttribute('aria-label', 'Personalizar prompt: ' + em.textContent);
+    lab.appendChild(inp);
+    row.appendChild(lab);
+    var rs = document.createElement('button');
+    rs.type = 'button';
+    rs.className = 'pv-reset';
+    rs.textContent = 'Restablecer';
+    row.appendChild(rs);
+    box.parentNode.insertBefore(row, box.nextSibling);
+    inp.addEventListener('input', function(){ applyPV(pid, inp.value, inp); });
+    rs.addEventListener('click', function(){ inp.value = ''; applyPV(pid, '', null); });
+  });
+  Object.keys(pvStore).forEach(function(pid){ applyPV(pid, pvStore[pid], null); });
+
+  /* --- Capítulo 8: copiar los 5 prompts y saltar al capítulo de origen --- */
+  var copyAll = document.getElementById('copyAll');
+  if(copyAll){
+    var caT;
+    copyAll.addEventListener('click', function(){
+      var out = [];
+      document.querySelectorAll('#cap8 .prompt-box').forEach(function(box, i){
+        var h = box.previousElementSibling;
+        while(h && h.tagName !== 'H4') h = h.previousElementSibling;
+        out.push((h ? h.textContent.trim() : (i + 1) + '.') + '\n' + promptText(box));
+      });
+      copyText(out.join('\n\n'), function(ok){
+        copyAll.classList.remove('copied','failed');
+        copyAll.classList.add(ok ? 'copied' : 'failed');
+        copyAll.textContent = ok ? '¡Copiados!' : 'Error';
+        clearTimeout(caT);
+        caT = setTimeout(function(){
+          copyAll.classList.remove('copied','failed');
+          copyAll.textContent = 'Copiar los 5 prompts';
+        }, 1800);
+      });
+    });
+  }
+  document.querySelectorAll('.origin-link').forEach(function(a){
+    a.addEventListener('click', function(){
+      var sec = this.getAttribute('data-goto');
+      var pid = this.getAttribute('data-focus');
+      setTimeout(function(){
+        var box = document.querySelector('#' + sec + ' .prompt-box[data-pid="' + pid + '"]');
+        if(!box) return;
+        box.scrollIntoView({behavior:'smooth', block:'center'});
+        flashEl(box);
+      }, 60);
+    });
+  });
+
+  /* --- Botones Anterior / Siguiente al final de cada sección --- */
+  var order = sections.map(function(s){ return s.id; });
+  function navLabel(id){
+    var b = navBtns.filter(function(x){ return x.getAttribute('data-target') === id; })[0];
+    return b ? b.textContent.trim() : id;
+  }
+  sections.forEach(function(sec, i){
+    var pg = document.createElement('div');
+    pg.className = 'pager';
+    function mk(cls, txt, id){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pg ' + cls;
+      var s = document.createElement('span');
+      s.textContent = txt;
+      var sm = document.createElement('small');
+      sm.textContent = navLabel(id);
+      b.appendChild(s);
+      b.appendChild(sm);
+      b.addEventListener('click', function(){ showSection(id); });
+      return b;
+    }
+    if(i > 0) pg.appendChild(mk('prev', '← Anterior', order[i - 1]));
+    if(i < order.length - 1) pg.appendChild(mk('next', 'Siguiente →', order[i + 1]));
+    sec.appendChild(pg);
+  });
+
+  /* --- Casillas de progreso (se guardan en el navegador) --- */
+  var doneStore = loadJSON('iaTut:done');
+  function saveDone(){ store.set('iaTut:done', JSON.stringify(doneStore)); }
+  var listMeta = [];
+  function refreshBadges(){
+    var bySec = {};
+    listMeta.forEach(function(m){
+      var o = bySec[m.sec] || (bySec[m.sec] = {d:0, t:0});
+      o.d += m.done || 0;
+      o.t += m.total || 0;
+    });
+    navBtns.forEach(function(b){
+      var o = bySec[b.getAttribute('data-target')];
+      b.classList.toggle('complete', !!(o && o.t > 0 && o.d === o.t));
+    });
+  }
+  sections.forEach(function(sec){
+    var lists = sec.querySelectorAll('ol.steps, ul.chk');
+    Array.prototype.forEach.call(lists, function(list, li){
+      var lid = sec.id + '-' + li;
+      var isSteps = list.classList.contains('steps');
+      var items = Array.prototype.slice.call(list.children).filter(function(n){ return n.tagName === 'LI'; });
+      var meta = {sec: sec.id, ids: [], done: 0, total: items.length};
+
+      var head = document.createElement('div');
+      head.className = 'list-progress';
+      var txt = document.createElement('span');
+      var bar = document.createElement('span');
+      bar.className = 'lp-bar';
+      var fill = document.createElement('i');
+      bar.appendChild(fill);
+      var reset = document.createElement('button');
+      reset.type = 'button';
+      reset.className = 'lp-reset';
+      reset.textContent = 'Reiniciar';
+      head.appendChild(txt);
+      head.appendChild(bar);
+      head.appendChild(reset);
+      list.parentNode.insertBefore(head, list);
+
+      function refreshList(){
+        var n = 0;
+        items.forEach(function(item, k){
+          var c = item.querySelector('input[type=checkbox]');
+          var on = !!doneStore[meta.ids[k]];
+          c.checked = on;
+          item.classList.toggle('done', on);
+          if(on) n++;
+          var lbl = item.querySelector('.done-chk span');
+          if(lbl) lbl.textContent = on ? '¡Hecho!' : 'Marcar como hecho';
+        });
+        txt.textContent = 'Progreso: ' + n + ' de ' + items.length;
+        fill.style.width = (items.length ? (n * 100 / items.length) : 0) + '%';
+        meta.done = n;
+        refreshBadges();
+      }
+
+      items.forEach(function(item, k){
+        var id = lid + '-' + k;
+        meta.ids.push(id);
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        if(isSteps){
+          var lab = document.createElement('label');
+          lab.className = 'done-chk';
+          var sp = document.createElement('span');
+          lab.appendChild(cb);
+          lab.appendChild(sp);
+          item.appendChild(lab);
+        }else{
+          cb.className = 'chk-in';
+          cb.setAttribute('aria-label','Marcar como hecho');
+          item.classList.add('has-cb');
+          item.insertBefore(cb, item.firstChild);
+        }
+        cb.addEventListener('change', function(){
+          if(cb.checked){ doneStore[id] = 1; } else { delete doneStore[id]; }
+          saveDone();
+          refreshList();
+        });
+      });
+      reset.addEventListener('click', function(){
+        meta.ids.forEach(function(id){ delete doneStore[id]; });
+        saveDone();
+        refreshList();
+      });
+      listMeta.push(meta);
+      refreshList();
+    });
+  });
+  refreshBadges();
+
+  /* --- Tamaño de letra, modo claro/oscuro, imprimir --- */
+  var FS = [90, 100, 115, 130, 145];
+  function getFs(){
+    var v = parseInt(store.get('iaTut:font'), 10);
+    return FS.indexOf(v) >= 0 ? v : 100;
+  }
+  function setFs(v){
+    root.style.fontSize = (v === 100) ? '' : v + '%';
+    store.set('iaTut:font', String(v));
+    toast('Tamaño de letra: ' + v + '%');
+  }
+  document.getElementById('fontDown').addEventListener('click', function(){
+    setFs(FS[Math.max(0, FS.indexOf(getFs()) - 1)]);
+  });
+  document.getElementById('fontUp').addEventListener('click', function(){
+    setFs(FS[Math.min(FS.length - 1, FS.indexOf(getFs()) + 1)]);
+  });
+  var themeBtn = document.getElementById('themeBtn');
+  function isLight(){ return root.getAttribute('data-theme') === 'light'; }
+  function paintThemeBtn(){
+    themeBtn.textContent = isLight() ? '🌙' : '☀';
+    themeBtn.title = isLight() ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro';
+    themeBtn.setAttribute('aria-label', themeBtn.title);
+  }
+  themeBtn.addEventListener('click', function(){
+    var n = isLight() ? 'dark' : 'light';
+    root.setAttribute('data-theme', n);
+    store.set('iaTut:theme', n);
+    paintThemeBtn();
+  });
+  paintThemeBtn();
+  document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+  var printing = false, themeBeforePrint = null;
+  window.addEventListener('beforeprint', function(){
+    printing = true;
+    themeBeforePrint = root.getAttribute('data-theme');
+    root.setAttribute('data-theme','light');
+  });
+  window.addEventListener('afterprint', function(){
+    if(!printing) return;
+    printing = false;
+    if(themeBeforePrint === null){ root.removeAttribute('data-theme'); }
+    else{ root.setAttribute('data-theme', themeBeforePrint); }
+  });
+
+  /* --- Buscador (capítulos, secciones y prompts) --- */
+  var ov = document.createElement('div');
+  ov.className = 's-ov';
+  ov.id = 'searchOv';
+  ov.hidden = true;
+  ov.setAttribute('role','dialog');
+  ov.setAttribute('aria-modal','true');
+  ov.setAttribute('aria-label','Buscar en el tutorial');
+  ov.innerHTML =
+    '<div class="s-box">' +
+      '<div class="s-top">' +
+        '<input id="searchInput" type="search" placeholder="Buscar capítulos, prompts, términos…" autocomplete="off" aria-label="Buscar">' +
+        '<button type="button" class="tool-btn" id="searchClose" aria-label="Cerrar búsqueda">✕</button>' +
+      '</div>' +
+      '<div class="s-filters">' +
+        '<button type="button" class="s-f active" data-f="all">Todo</button>' +
+        '<button type="button" class="s-f" data-f="prompts">Solo prompts</button>' +
+      '</div>' +
+      '<div class="s-res" id="searchRes" role="listbox"></div>' +
+      '<div class="s-hint">↑ ↓ navegar · Enter abrir · Esc cerrar · atajo: / o Ctrl+K</div>' +
+    '</div>';
+  document.body.appendChild(ov);
+  var sInput = document.getElementById('searchInput');
+  var sRes = document.getElementById('searchRes');
+  var searchBtn = document.getElementById('searchBtn');
+  var searchFilter = 'all', searchIdx = [], results = [], selIdx = 0;
+
+  function norm(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(); }
+
+  function textOf(el, skipPrompts){
+    var c = el.cloneNode(true);
+    var sel = '.copy-btn,.done-chk,.list-progress,.pv-row,.pager,.origin-link-row,.copyall-row,svg,script,style,input';
+    if(skipPrompts) sel += ',.prompt-box';
+    Array.prototype.forEach.call(c.querySelectorAll(sel), function(n){ n.parentNode.removeChild(n); });
+    return c.textContent.replace(/\s+/g,' ').trim();
+  }
+
+  function buildIndex(){
+    var idx = [];
+    sections.forEach(function(sec){
+      var label = navLabel(sec.id);
+      var h2 = sec.querySelector('.sec-head h2');
+      var secTitle = h2 ? h2.textContent.trim() : label;
+      Array.prototype.forEach.call(sec.querySelectorAll('.card, .src-card, .credit-item'), function(el){
+        var h = el.querySelector('h3, h4, .k');
+        idx.push({
+          type:'card', sec:sec.id, label:label,
+          title: h ? h.textContent.replace(/\s+/g,' ').trim() : secTitle,
+          text: textOf(el, true), el: el
+        });
+      });
+      Array.prototype.forEach.call(sec.querySelectorAll('.prompt-box'), function(box){
+        var t = box.previousElementSibling;
+        while(t && t.tagName !== 'H4') t = t.previousElementSibling;
+        var card = box.closest('.card');
+        var h3 = card && card.querySelector('h3');
+        idx.push({
+          type:'prompt', sec:sec.id, label:label,
+          title: t ? t.textContent.trim() : (h3 ? h3.textContent.replace(/\s+/g,' ').trim() : 'Prompt'),
+          text: promptText(box), el: box
+        });
+      });
+    });
+    return idx;
+  }
+
+  function snippet(text, words){
+    var frag = document.createDocumentFragment();
+    if(!text) return frag;
+    var nt = norm(text), same = (nt.length === text.length), pos = -1;
+    for(var i = 0; i < words.length; i++){
+      var p = nt.indexOf(words[i]);
+      if(p >= 0 && (pos < 0 || p < pos)) pos = p;
+    }
+    var start = Math.max(0, (pos < 0 ? 0 : pos) - 50);
+    var end = Math.min(text.length, start + 150);
+    var snip = text.slice(start, end);
+    if(start > 0) frag.appendChild(document.createTextNode('… '));
+    if(!same || !words.length){
+      frag.appendChild(document.createTextNode(snip));
+    }else{
+      var ns = nt.slice(start, end), marks = [];
+      words.forEach(function(w){
+        var from = 0, p2;
+        while((p2 = ns.indexOf(w, from)) >= 0){ marks.push([p2, p2 + w.length]); from = p2 + w.length; }
+      });
+      marks.sort(function(a, b){ return a[0] - b[0]; });
+      var cur = 0;
+      marks.forEach(function(m){
+        var s = Math.max(m[0], cur), e = m[1];
+        if(e <= s) return;
+        if(s > cur) frag.appendChild(document.createTextNode(snip.slice(cur, s)));
+        var mk = document.createElement('mark');
+        mk.textContent = snip.slice(s, e);
+        frag.appendChild(mk);
+        cur = e;
+      });
+      if(cur < snip.length) frag.appendChild(document.createTextNode(snip.slice(cur)));
+    }
+    if(end < text.length) frag.appendChild(document.createTextNode(' …'));
+    return frag;
+  }
+
+  function setSel(i, scroll){
+    var items = sRes.querySelectorAll('.s-item');
+    if(!items.length) return;
+    selIdx = i;
+    Array.prototype.forEach.call(items, function(it, k){ it.classList.toggle('sel', k === i); });
+    if(scroll && items[i].scrollIntoView) items[i].scrollIntoView({block:'nearest'});
+  }
+
+  function render(words){
+    sRes.innerHTML = '';
+    selIdx = 0;
+    if(!results.length){
+      var d = document.createElement('div');
+      d.className = 's-empty';
+      d.textContent = 'Sin resultados. Prueba con otra palabra.';
+      sRes.appendChild(d);
+      return;
+    }
+    results.forEach(function(r, i){
+      var e = r.e;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 's-item ' + e.type + (i === 0 ? ' sel' : '');
+      b.setAttribute('role','option');
+      var meta = document.createElement('div');
+      meta.className = 's-meta';
+      var bb = document.createElement('b');
+      bb.textContent = e.type === 'prompt' ? 'Prompt' : (e.type === 'chapter' ? 'Capítulo' : 'Sección');
+      meta.appendChild(bb);
+      meta.appendChild(document.createTextNode(' · ' + e.label));
+      var t = document.createElement('div');
+      t.className = 's-title';
+      t.textContent = e.title;
+      b.appendChild(meta);
+      b.appendChild(t);
+      if(e.text){
+        var sn = document.createElement('div');
+        sn.className = 's-snip';
+        sn.appendChild(snippet(e.text, words));
+        b.appendChild(sn);
+      }
+      b.addEventListener('click', function(){ pick(i); });
+      b.addEventListener('mousemove', function(){ if(selIdx !== i) setSel(i, false); });
+      sRes.appendChild(b);
+    });
+  }
+
+  function runSearch(){
+    var q = norm(sInput.value).trim();
+    var words = q ? q.split(/\s+/) : [];
+    var list = [];
+    if(!words.length){
+      if(searchFilter === 'prompts'){
+        searchIdx.forEach(function(e){ if(e.type === 'prompt') list.push({e:e, score:0}); });
+      }else{
+        sections.forEach(function(sec){
+          var h2 = sec.querySelector('.sec-head h2');
+          list.push({e:{type:'chapter', sec:sec.id, label:navLabel(sec.id),
+            title: h2 ? h2.textContent.trim() : navLabel(sec.id), text:'', el:sec}, score:0});
+        });
+      }
+    }else{
+      searchIdx.forEach(function(e){
+        if(searchFilter === 'prompts' && e.type !== 'prompt') return;
+        var nt = norm(e.text), nti = norm(e.title), score = 0, ok = true;
+        for(var i = 0; i < words.length; i++){
+          var inT = nti.indexOf(words[i]) >= 0, inB = nt.indexOf(words[i]) >= 0;
+          if(!inT && !inB){ ok = false; break; }
+          score += (inT ? 3 : 0) + (inB ? 1 : 0);
+        }
+        if(ok){ if(e.type === 'prompt') score += 1; list.push({e:e, score:score}); }
+      });
+      list.sort(function(a, b){ return b.score - a.score; });
+    }
+    results = list.slice(0, 30);
+    render(words);
+  }
+
+  function pick(i){
+    var r = results[i];
+    if(!r) return;
+    var e = r.e;
+    closeSearch(false);
+    showSection(e.sec);
+    setTimeout(function(){
+      if(e.type === 'chapter') return;
+      Array.prototype.forEach.call(e.el.querySelectorAll('.acc'), function(a){ a.classList.add('open'); });
+      var acc = e.el.closest('.acc');
+      if(acc) acc.classList.add('open');
+      e.el.scrollIntoView({behavior:'smooth', block:'center'});
+      flashEl(e.el);
+    }, 60);
+  }
+
+  function openSearch(){
+    searchIdx = buildIndex();
+    searchFilter = 'all';
+    Array.prototype.forEach.call(ov.querySelectorAll('.s-f'), function(f){
+      f.classList.toggle('active', f.getAttribute('data-f') === 'all');
+    });
+    sInput.value = '';
+    ov.hidden = false;
+    document.body.style.overflow = 'hidden';
+    runSearch();
+    setTimeout(function(){ sInput.focus(); }, 0);
+  }
+  function closeSearch(refocus){
+    ov.hidden = true;
+    document.body.style.overflow = '';
+    if(refocus !== false && searchBtn) searchBtn.focus();
+  }
+  searchBtn.addEventListener('click', openSearch);
+  document.getElementById('searchClose').addEventListener('click', function(){ closeSearch(true); });
+  ov.addEventListener('click', function(e){ if(e.target === ov) closeSearch(true); });
+  sInput.addEventListener('input', runSearch);
+  Array.prototype.forEach.call(ov.querySelectorAll('.s-f'), function(f){
+    f.addEventListener('click', function(){
+      searchFilter = f.getAttribute('data-f');
+      Array.prototype.forEach.call(ov.querySelectorAll('.s-f'), function(x){ x.classList.toggle('active', x === f); });
+      runSearch();
+      sInput.focus();
+    });
+  });
+  document.addEventListener('keydown', function(e){
+    var tag = (e.target && e.target.tagName) || '';
+    var typing = /^(INPUT|TEXTAREA|SELECT)$/.test(tag) || (e.target && e.target.isContentEditable);
+    if(!ov.hidden){
+      if(e.key === 'Escape'){ e.preventDefault(); closeSearch(true); }
+      else if(e.key === 'ArrowDown'){ e.preventDefault(); setSel(Math.min(results.length - 1, selIdx + 1), true); }
+      else if(e.key === 'ArrowUp'){ e.preventDefault(); setSel(Math.max(0, selIdx - 1), true); }
+      else if(e.key === 'Enter' && e.target === sInput){ e.preventDefault(); pick(selIdx); }
+      return;
+    }
+    var k = (e.key || '').toLowerCase();
+    if((e.key === '/' && !typing && !e.ctrlKey && !e.metaKey && !e.altKey) || ((e.ctrlKey || e.metaKey) && k === 'k')){
+      e.preventDefault();
+      openSearch();
+    }
+  });
+
+  /* ============ INIT ============ */
+  updateProgress();
+  /* Pre-clonar el SVG en créditos (oculto) para que al abrir la pestaña ya esté */
+  fillCreditsSvg(false);
+
+})();
+</script>
+</body>
+</html>
